@@ -16,5 +16,11 @@ namespace FileExplorer
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            MenuTabControl.SelectedTab = HomeTabPage;
+            SearchTextBox.Text = "Search";
+        }
     }
 }
