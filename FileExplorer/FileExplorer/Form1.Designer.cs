@@ -29,23 +29,35 @@
         private void InitializeComponent()
         {
             this.FileDGV = new System.Windows.Forms.DataGridView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.MenuTabControl = new System.Windows.Forms.TabControl();
-            this.HomeTabPage = new System.Windows.Forms.TabPage();
-            this.FileTabPage = new System.Windows.Forms.TabPage();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateModifiedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UrlTextBox = new System.Windows.Forms.TextBox();
+            this.MenuTabControl = new System.Windows.Forms.TabControl();
+            this.FileTabPage = new System.Windows.Forms.TabPage();
+            this.HomeTabPage = new System.Windows.Forms.TabPage();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.FileTabControl = new System.Windows.Forms.TabControl();
             this.DefaultTabPage = new System.Windows.Forms.TabPage();
-            this.NextTabPage = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.FileDetailGroupBox = new System.Windows.Forms.GroupBox();
+            this.NewWindowButton = new System.Windows.Forms.Button();
+            this.PowershellButton = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
+            this.CopyButton = new System.Windows.Forms.Button();
+            this.PasteButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.RenameButton = new System.Windows.Forms.Button();
+            this.NewFolderButton = new System.Windows.Forms.Button();
+            this.ShortcutGroupBox = new System.Windows.Forms.GroupBox();
+            this.testbutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).BeginInit();
             this.MenuTabControl.SuspendLayout();
+            this.FileTabPage.SuspendLayout();
+            this.HomeTabPage.SuspendLayout();
             this.FileTabControl.SuspendLayout();
             this.DefaultTabPage.SuspendLayout();
+            this.ShortcutGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // FileDGV
@@ -66,46 +78,8 @@
             this.FileDGV.Name = "FileDGV";
             this.FileDGV.RowHeadersVisible = false;
             this.FileDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.FileDGV.Size = new System.Drawing.Size(603, 382);
+            this.FileDGV.Size = new System.Drawing.Size(603, 405);
             this.FileDGV.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(0, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(603, 22);
-            this.textBox1.TabIndex = 1;
-            // 
-            // MenuTabControl
-            // 
-            this.MenuTabControl.Controls.Add(this.FileTabPage);
-            this.MenuTabControl.Controls.Add(this.HomeTabPage);
-            this.MenuTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MenuTabControl.Location = new System.Drawing.Point(-3, -2);
-            this.MenuTabControl.Name = "MenuTabControl";
-            this.MenuTabControl.SelectedIndex = 0;
-            this.MenuTabControl.Size = new System.Drawing.Size(934, 129);
-            this.MenuTabControl.TabIndex = 3;
-            // 
-            // HomeTabPage
-            // 
-            this.HomeTabPage.BackColor = System.Drawing.SystemColors.Control;
-            this.HomeTabPage.Location = new System.Drawing.Point(4, 29);
-            this.HomeTabPage.Name = "HomeTabPage";
-            this.HomeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.HomeTabPage.Size = new System.Drawing.Size(926, 96);
-            this.HomeTabPage.TabIndex = 0;
-            this.HomeTabPage.Text = "Home";
-            // 
-            // FileTabPage
-            // 
-            this.FileTabPage.BackColor = System.Drawing.SystemColors.Control;
-            this.FileTabPage.Location = new System.Drawing.Point(4, 29);
-            this.FileTabPage.Name = "FileTabPage";
-            this.FileTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FileTabPage.Size = new System.Drawing.Size(926, 96);
-            this.FileTabPage.TabIndex = 1;
-            this.FileTabPage.Text = "File";
             // 
             // NameColumn
             // 
@@ -132,6 +106,52 @@
             this.SizeColumn.Name = "SizeColumn";
             this.SizeColumn.ReadOnly = true;
             // 
+            // UrlTextBox
+            // 
+            this.UrlTextBox.Location = new System.Drawing.Point(0, 6);
+            this.UrlTextBox.Name = "UrlTextBox";
+            this.UrlTextBox.Size = new System.Drawing.Size(603, 22);
+            this.UrlTextBox.TabIndex = 1;
+            // 
+            // MenuTabControl
+            // 
+            this.MenuTabControl.Controls.Add(this.FileTabPage);
+            this.MenuTabControl.Controls.Add(this.HomeTabPage);
+            this.MenuTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MenuTabControl.Location = new System.Drawing.Point(-3, -2);
+            this.MenuTabControl.Name = "MenuTabControl";
+            this.MenuTabControl.SelectedIndex = 0;
+            this.MenuTabControl.Size = new System.Drawing.Size(934, 99);
+            this.MenuTabControl.TabIndex = 3;
+            // 
+            // FileTabPage
+            // 
+            this.FileTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.FileTabPage.Controls.Add(this.CloseButton);
+            this.FileTabPage.Controls.Add(this.PowershellButton);
+            this.FileTabPage.Controls.Add(this.NewWindowButton);
+            this.FileTabPage.Location = new System.Drawing.Point(4, 29);
+            this.FileTabPage.Name = "FileTabPage";
+            this.FileTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.FileTabPage.Size = new System.Drawing.Size(926, 66);
+            this.FileTabPage.TabIndex = 1;
+            this.FileTabPage.Text = "  File";
+            // 
+            // HomeTabPage
+            // 
+            this.HomeTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.HomeTabPage.Controls.Add(this.NewFolderButton);
+            this.HomeTabPage.Controls.Add(this.RenameButton);
+            this.HomeTabPage.Controls.Add(this.DeleteButton);
+            this.HomeTabPage.Controls.Add(this.PasteButton);
+            this.HomeTabPage.Controls.Add(this.CopyButton);
+            this.HomeTabPage.Location = new System.Drawing.Point(4, 29);
+            this.HomeTabPage.Name = "HomeTabPage";
+            this.HomeTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.HomeTabPage.Size = new System.Drawing.Size(926, 66);
+            this.HomeTabPage.TabIndex = 0;
+            this.HomeTabPage.Text = "Home";
+            // 
             // SearchTextBox
             // 
             this.SearchTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
@@ -143,44 +163,126 @@
             // FileTabControl
             // 
             this.FileTabControl.Controls.Add(this.DefaultTabPage);
-            this.FileTabControl.Controls.Add(this.NextTabPage);
-            this.FileTabControl.Location = new System.Drawing.Point(141, 129);
+            this.FileTabControl.Location = new System.Drawing.Point(141, 103);
             this.FileTabControl.Name = "FileTabControl";
             this.FileTabControl.SelectedIndex = 0;
-            this.FileTabControl.Size = new System.Drawing.Size(790, 446);
+            this.FileTabControl.Size = new System.Drawing.Size(790, 469);
             this.FileTabControl.TabIndex = 5;
             // 
             // DefaultTabPage
             // 
-            this.DefaultTabPage.Controls.Add(this.groupBox1);
+            this.DefaultTabPage.Controls.Add(this.FileDetailGroupBox);
             this.DefaultTabPage.Controls.Add(this.FileDGV);
             this.DefaultTabPage.Controls.Add(this.SearchTextBox);
-            this.DefaultTabPage.Controls.Add(this.textBox1);
+            this.DefaultTabPage.Controls.Add(this.UrlTextBox);
             this.DefaultTabPage.Location = new System.Drawing.Point(4, 25);
             this.DefaultTabPage.Name = "DefaultTabPage";
             this.DefaultTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DefaultTabPage.Size = new System.Drawing.Size(782, 417);
+            this.DefaultTabPage.Size = new System.Drawing.Size(782, 440);
             this.DefaultTabPage.TabIndex = 0;
             this.DefaultTabPage.Text = "Home";
             this.DefaultTabPage.UseVisualStyleBackColor = true;
             // 
-            // NextTabPage
+            // FileDetailGroupBox
             // 
-            this.NextTabPage.Location = new System.Drawing.Point(4, 25);
-            this.NextTabPage.Name = "NextTabPage";
-            this.NextTabPage.Size = new System.Drawing.Size(845, 417);
-            this.NextTabPage.TabIndex = 1;
-            this.NextTabPage.Text = "    +";
-            this.NextTabPage.UseVisualStyleBackColor = true;
+            this.FileDetailGroupBox.Location = new System.Drawing.Point(609, 35);
+            this.FileDetailGroupBox.Name = "FileDetailGroupBox";
+            this.FileDetailGroupBox.Size = new System.Drawing.Size(170, 405);
+            this.FileDetailGroupBox.TabIndex = 5;
+            this.FileDetailGroupBox.TabStop = false;
+            this.FileDetailGroupBox.Text = "File Detail";
             // 
-            // groupBox1
+            // NewWindowButton
             // 
-            this.groupBox1.Location = new System.Drawing.Point(609, 35);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(170, 382);
-            this.groupBox1.TabIndex = 5;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.NewWindowButton.Location = new System.Drawing.Point(6, 6);
+            this.NewWindowButton.Name = "NewWindowButton";
+            this.NewWindowButton.Size = new System.Drawing.Size(170, 53);
+            this.NewWindowButton.TabIndex = 0;
+            this.NewWindowButton.Text = "Open New Window";
+            this.NewWindowButton.UseVisualStyleBackColor = true;
+            // 
+            // PowershellButton
+            // 
+            this.PowershellButton.Location = new System.Drawing.Point(182, 6);
+            this.PowershellButton.Name = "PowershellButton";
+            this.PowershellButton.Size = new System.Drawing.Size(170, 53);
+            this.PowershellButton.TabIndex = 1;
+            this.PowershellButton.Text = "Open Powershell";
+            this.PowershellButton.UseVisualStyleBackColor = true;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(358, 6);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(170, 53);
+            this.CloseButton.TabIndex = 2;
+            this.CloseButton.Text = "Close Explorer";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            // 
+            // CopyButton
+            // 
+            this.CopyButton.Location = new System.Drawing.Point(6, 6);
+            this.CopyButton.Name = "CopyButton";
+            this.CopyButton.Size = new System.Drawing.Size(132, 53);
+            this.CopyButton.TabIndex = 1;
+            this.CopyButton.Text = "Copy";
+            this.CopyButton.UseVisualStyleBackColor = true;
+            // 
+            // PasteButton
+            // 
+            this.PasteButton.Location = new System.Drawing.Point(144, 6);
+            this.PasteButton.Name = "PasteButton";
+            this.PasteButton.Size = new System.Drawing.Size(132, 53);
+            this.PasteButton.TabIndex = 2;
+            this.PasteButton.Text = "Paste";
+            this.PasteButton.UseVisualStyleBackColor = true;
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(282, 6);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(132, 53);
+            this.DeleteButton.TabIndex = 3;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            // 
+            // RenameButton
+            // 
+            this.RenameButton.Location = new System.Drawing.Point(420, 6);
+            this.RenameButton.Name = "RenameButton";
+            this.RenameButton.Size = new System.Drawing.Size(132, 53);
+            this.RenameButton.TabIndex = 4;
+            this.RenameButton.Text = "Rename";
+            this.RenameButton.UseVisualStyleBackColor = true;
+            // 
+            // NewFolderButton
+            // 
+            this.NewFolderButton.Location = new System.Drawing.Point(558, 6);
+            this.NewFolderButton.Name = "NewFolderButton";
+            this.NewFolderButton.Size = new System.Drawing.Size(132, 53);
+            this.NewFolderButton.TabIndex = 5;
+            this.NewFolderButton.Text = "New Folder";
+            this.NewFolderButton.UseVisualStyleBackColor = true;
+            // 
+            // ShortcutGroupBox
+            // 
+            this.ShortcutGroupBox.Controls.Add(this.testbutton);
+            this.ShortcutGroupBox.Location = new System.Drawing.Point(2, 96);
+            this.ShortcutGroupBox.Name = "ShortcutGroupBox";
+            this.ShortcutGroupBox.Size = new System.Drawing.Size(133, 476);
+            this.ShortcutGroupBox.TabIndex = 6;
+            this.ShortcutGroupBox.TabStop = false;
+            this.ShortcutGroupBox.Text = "Shortcuts";
+            // 
+            // testbutton
+            // 
+            this.testbutton.Location = new System.Drawing.Point(30, 133);
+            this.testbutton.Name = "testbutton";
+            this.testbutton.Size = new System.Drawing.Size(84, 90);
+            this.testbutton.TabIndex = 0;
+            this.testbutton.Text = "testbutton";
+            this.testbutton.UseVisualStyleBackColor = true;
+            this.testbutton.Click += new System.EventHandler(this.testbutton_Click);
             // 
             // Form1
             // 
@@ -188,6 +290,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(931, 573);
+            this.Controls.Add(this.ShortcutGroupBox);
             this.Controls.Add(this.FileTabControl);
             this.Controls.Add(this.MenuTabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -197,9 +300,12 @@
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).EndInit();
             this.MenuTabControl.ResumeLayout(false);
+            this.FileTabPage.ResumeLayout(false);
+            this.HomeTabPage.ResumeLayout(false);
             this.FileTabControl.ResumeLayout(false);
             this.DefaultTabPage.ResumeLayout(false);
             this.DefaultTabPage.PerformLayout();
+            this.ShortcutGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -207,7 +313,7 @@
         #endregion
 
         private System.Windows.Forms.DataGridView FileDGV;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox UrlTextBox;
         private System.Windows.Forms.TabControl MenuTabControl;
         private System.Windows.Forms.TabPage HomeTabPage;
         private System.Windows.Forms.TabPage FileTabPage;
@@ -218,8 +324,17 @@
         private System.Windows.Forms.TextBox SearchTextBox;
         private System.Windows.Forms.TabControl FileTabControl;
         private System.Windows.Forms.TabPage DefaultTabPage;
-        private System.Windows.Forms.TabPage NextTabPage;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox FileDetailGroupBox;
+        private System.Windows.Forms.Button NewWindowButton;
+        private System.Windows.Forms.Button PowershellButton;
+        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button CopyButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.Button PasteButton;
+        private System.Windows.Forms.Button NewFolderButton;
+        private System.Windows.Forms.Button RenameButton;
+        private System.Windows.Forms.GroupBox ShortcutGroupBox;
+        private System.Windows.Forms.Button testbutton;
     }
 }
 
