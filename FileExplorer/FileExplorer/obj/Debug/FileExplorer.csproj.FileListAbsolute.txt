@@ -8,3 +8,13 @@ F:\Programs\C#\ECE 4310\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\
 F:\Programs\C#\ECE 4310\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe
 F:\Programs\C#\ECE 4310\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.pdb
 F:\Programs\C#\ECE 4310\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.Form1.resources
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe.config
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.pdb
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csprojAssemblyReference.cache
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.Form1.resources
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.Properties.Resources.resources
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csproj.GenerateResource.cache
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csproj.CoreCompileInputs.cache
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.pdb
