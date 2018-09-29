@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.FileDGV = new System.Windows.Forms.DataGridView();
+            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DateModifiedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UrlTextBox = new System.Windows.Forms.TextBox();
             this.MenuTabControl = new System.Windows.Forms.TabControl();
             this.FileTabPage = new System.Windows.Forms.TabPage();
@@ -45,22 +49,12 @@
             this.FileTabControl = new System.Windows.Forms.TabControl();
             this.DefaultTabPage = new System.Windows.Forms.TabPage();
             this.FileDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.ShortcutGroupBox = new System.Windows.Forms.GroupBox();
-            this.UpDirectoryButton = new System.Windows.Forms.Button();
-            this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DateModifiedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.DetailLabel = new System.Windows.Forms.Label();
+            this.UpDirectoryButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
+            this.ShortcutDGV = new System.Windows.Forms.DataGridView();
+            this.ShortcutColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).BeginInit();
             this.MenuTabControl.SuspendLayout();
             this.FileTabPage.SuspendLayout();
@@ -68,7 +62,7 @@
             this.FileTabControl.SuspendLayout();
             this.DefaultTabPage.SuspendLayout();
             this.FileDetailGroupBox.SuspendLayout();
-            this.ShortcutGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ShortcutDGV)).BeginInit();
             this.SuspendLayout();
             // 
             // FileDGV
@@ -84,14 +78,40 @@
             this.TypeColumn,
             this.SizeColumn});
             this.FileDGV.GridColor = System.Drawing.SystemColors.Control;
-            this.FileDGV.Location = new System.Drawing.Point(0, 35);
+            this.FileDGV.Location = new System.Drawing.Point(0, 31);
             this.FileDGV.Margin = new System.Windows.Forms.Padding(4);
             this.FileDGV.Name = "FileDGV";
             this.FileDGV.RowHeadersVisible = false;
             this.FileDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.FileDGV.Size = new System.Drawing.Size(603, 405);
+            this.FileDGV.Size = new System.Drawing.Size(603, 409);
             this.FileDGV.TabIndex = 0;
             this.FileDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileDGV_CellContentClick);
+            // 
+            // NameColumn
+            // 
+            this.NameColumn.HeaderText = "Name";
+            this.NameColumn.Name = "NameColumn";
+            this.NameColumn.ReadOnly = true;
+            this.NameColumn.Width = 250;
+            // 
+            // DateModifiedColumn
+            // 
+            this.DateModifiedColumn.HeaderText = "Date Modified";
+            this.DateModifiedColumn.Name = "DateModifiedColumn";
+            this.DateModifiedColumn.ReadOnly = true;
+            this.DateModifiedColumn.Width = 150;
+            // 
+            // TypeColumn
+            // 
+            this.TypeColumn.HeaderText = "Type";
+            this.TypeColumn.Name = "TypeColumn";
+            this.TypeColumn.ReadOnly = true;
+            // 
+            // SizeColumn
+            // 
+            this.SizeColumn.HeaderText = "Size (KB)";
+            this.SizeColumn.Name = "SizeColumn";
+            this.SizeColumn.ReadOnly = true;
             // 
             // UrlTextBox
             // 
@@ -132,6 +152,7 @@
             this.CloseButton.TabIndex = 2;
             this.CloseButton.Text = "Close Explorer";
             this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // PowershellButton
             // 
@@ -141,6 +162,7 @@
             this.PowershellButton.TabIndex = 1;
             this.PowershellButton.Text = "Open Powershell";
             this.PowershellButton.UseVisualStyleBackColor = true;
+            this.PowershellButton.Click += new System.EventHandler(this.PowershellButton_Click);
             // 
             // NewWindowButton
             // 
@@ -150,6 +172,7 @@
             this.NewWindowButton.TabIndex = 0;
             this.NewWindowButton.Text = "Open New Window";
             this.NewWindowButton.UseVisualStyleBackColor = true;
+            this.NewWindowButton.Click += new System.EventHandler(this.NewWindowButton_Click);
             // 
             // HomeTabPage
             // 
@@ -252,21 +275,14 @@
             this.FileDetailGroupBox.TabStop = false;
             this.FileDetailGroupBox.Text = "File Detail";
             // 
-            // ShortcutGroupBox
+            // DetailLabel
             // 
-            this.ShortcutGroupBox.Controls.Add(this.button7);
-            this.ShortcutGroupBox.Controls.Add(this.button6);
-            this.ShortcutGroupBox.Controls.Add(this.button5);
-            this.ShortcutGroupBox.Controls.Add(this.button4);
-            this.ShortcutGroupBox.Controls.Add(this.button3);
-            this.ShortcutGroupBox.Controls.Add(this.button2);
-            this.ShortcutGroupBox.Controls.Add(this.button1);
-            this.ShortcutGroupBox.Location = new System.Drawing.Point(2, 96);
-            this.ShortcutGroupBox.Name = "ShortcutGroupBox";
-            this.ShortcutGroupBox.Size = new System.Drawing.Size(133, 476);
-            this.ShortcutGroupBox.TabIndex = 6;
-            this.ShortcutGroupBox.TabStop = false;
-            this.ShortcutGroupBox.Text = "Shortcuts";
+            this.DetailLabel.AutoSize = true;
+            this.DetailLabel.Location = new System.Drawing.Point(6, 18);
+            this.DetailLabel.Name = "DetailLabel";
+            this.DetailLabel.Size = new System.Drawing.Size(77, 16);
+            this.DetailLabel.TabIndex = 0;
+            this.DetailLabel.Text = "DetailLabel";
             // 
             // UpDirectoryButton
             // 
@@ -277,104 +293,6 @@
             this.UpDirectoryButton.Text = "Up";
             this.UpDirectoryButton.UseVisualStyleBackColor = true;
             this.UpDirectoryButton.Click += new System.EventHandler(this.UpDirectoryButton_Click);
-            // 
-            // NameColumn
-            // 
-            this.NameColumn.HeaderText = "Name";
-            this.NameColumn.Name = "NameColumn";
-            this.NameColumn.ReadOnly = true;
-            this.NameColumn.Width = 250;
-            // 
-            // DateModifiedColumn
-            // 
-            this.DateModifiedColumn.HeaderText = "Date Modified";
-            this.DateModifiedColumn.Name = "DateModifiedColumn";
-            this.DateModifiedColumn.ReadOnly = true;
-            this.DateModifiedColumn.Width = 150;
-            // 
-            // TypeColumn
-            // 
-            this.TypeColumn.HeaderText = "Type";
-            this.TypeColumn.Name = "TypeColumn";
-            this.TypeColumn.ReadOnly = true;
-            // 
-            // SizeColumn
-            // 
-            this.SizeColumn.HeaderText = "Size (KB)";
-            this.SizeColumn.Name = "SizeColumn";
-            this.SizeColumn.ReadOnly = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 21);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 28);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "This PC";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 55);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(121, 28);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Desktop";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 89);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(121, 28);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "Documents";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(6, 123);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(121, 28);
-            this.button4.TabIndex = 3;
-            this.button4.Text = "Downloads";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 157);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(121, 28);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "Music";
-            this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(6, 191);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(121, 28);
-            this.button6.TabIndex = 5;
-            this.button6.Text = "Pictures";
-            this.button6.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(6, 225);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(121, 28);
-            this.button7.TabIndex = 6;
-            this.button7.Text = "Videos";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // DetailLabel
-            // 
-            this.DetailLabel.AutoSize = true;
-            this.DetailLabel.Location = new System.Drawing.Point(6, 18);
-            this.DetailLabel.Name = "DetailLabel";
-            this.DetailLabel.Size = new System.Drawing.Size(77, 16);
-            this.DetailLabel.TabIndex = 0;
-            this.DetailLabel.Text = "DetailLabel";
             // 
             // PreviousButton
             // 
@@ -396,16 +314,44 @@
             this.NextButton.UseVisualStyleBackColor = true;
             this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
             // 
+            // ShortcutDGV
+            // 
+            this.ShortcutDGV.AllowUserToAddRows = false;
+            this.ShortcutDGV.AllowUserToDeleteRows = false;
+            this.ShortcutDGV.AllowUserToResizeColumns = false;
+            this.ShortcutDGV.AllowUserToResizeRows = false;
+            this.ShortcutDGV.BackgroundColor = System.Drawing.Color.White;
+            this.ShortcutDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ShortcutDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ShortcutColumn});
+            this.ShortcutDGV.GridColor = System.Drawing.SystemColors.Control;
+            this.ShortcutDGV.Location = new System.Drawing.Point(4, 102);
+            this.ShortcutDGV.Margin = new System.Windows.Forms.Padding(4);
+            this.ShortcutDGV.MultiSelect = false;
+            this.ShortcutDGV.Name = "ShortcutDGV";
+            this.ShortcutDGV.RowHeadersVisible = false;
+            this.ShortcutDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.ShortcutDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.ShortcutDGV.Size = new System.Drawing.Size(134, 466);
+            this.ShortcutDGV.TabIndex = 9;
+            // 
+            // ShortcutColumn
+            // 
+            this.ShortcutColumn.HeaderText = "Shortcuts";
+            this.ShortcutColumn.Name = "ShortcutColumn";
+            this.ShortcutColumn.ReadOnly = true;
+            this.ShortcutColumn.Width = 131;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(931, 573);
+            this.Controls.Add(this.ShortcutDGV);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.PreviousButton);
             this.Controls.Add(this.UpDirectoryButton);
-            this.Controls.Add(this.ShortcutGroupBox);
             this.Controls.Add(this.FileTabControl);
             this.Controls.Add(this.MenuTabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -422,7 +368,7 @@
             this.DefaultTabPage.PerformLayout();
             this.FileDetailGroupBox.ResumeLayout(false);
             this.FileDetailGroupBox.PerformLayout();
-            this.ShortcutGroupBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ShortcutDGV)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -446,22 +392,16 @@
         private System.Windows.Forms.Button PasteButton;
         private System.Windows.Forms.Button NewFolderButton;
         private System.Windows.Forms.Button RenameButton;
-        private System.Windows.Forms.GroupBox ShortcutGroupBox;
         private System.Windows.Forms.Button UpDirectoryButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DateModifiedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label DetailLabel;
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.Button NextButton;
+        private System.Windows.Forms.DataGridView ShortcutDGV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ShortcutColumn;
     }
 }
 

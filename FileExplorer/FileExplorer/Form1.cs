@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace FileExplorer
 {
@@ -16,6 +17,8 @@ namespace FileExplorer
         private Backend.PageData page;
         private List<string> prevStack;
         private List<string> nextStack;
+        private List<string> shortcuts;
+        private List<string> drives;
 
         public Form1()
         {
@@ -34,6 +37,8 @@ namespace FileExplorer
             page = new Backend.PageData(Backend.Constants.ROOT);
             prevStack = new List<string>();
             nextStack = new List<string>();
+            shortcuts = new List<string>();
+            drives = Directory.GetLogicalDrives().ToList();
         }
 
         /// <summary>
@@ -48,6 +53,7 @@ namespace FileExplorer
             FileDGV.DoubleClick += FileDGV_DoubleClick;
             FileDGV.Click += FileDGV_Click;
 
+            ShortcutDGV.CellContentClick += ShortcutDGV_CellContentClick;
         }
 
 
@@ -56,7 +62,12 @@ namespace FileExplorer
         private void UrlTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Enter)
+            {
                 UpdatePageData();
+
+                // forward cannot go if a file is entered
+                nextStack.Clear();
+            }
         }
 
         // go into the folder
@@ -67,7 +78,27 @@ namespace FileExplorer
 
             UrlTextBox.Text += @"\" + itemName;
             DetailLabel.Text = "";
-            UpdatePageData();
+
+            // get the file attributes for file or directory
+            FileAttributes attr = File.GetAttributes(UrlTextBox.Text);
+
+            //detect whether its a directory or file
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                // its a directory
+                UpdatePageData();
+            }
+            else
+            {
+                // its a file
+                Process.Start(UrlTextBox.Text);
+
+                // reset the url to stay in the folder (can't be in a file)
+                UrlTextBox.Text = page.URL;
+            }
+
+            // forward cannot go if a file is double clicked
+            nextStack.Clear();
         }
         
         // show details of the folder
@@ -79,6 +110,12 @@ namespace FileExplorer
             UpdatePageDetails();
         }
 
+        // click on a shortcut
+        private void ShortcutDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            UrlTextBox.Text = shortcuts[e.RowIndex];
+            UpdatePageData();
+        }
         #endregion
 
         /// <summary>
@@ -95,14 +132,8 @@ namespace FileExplorer
             MenuTabControl.SelectedTab = HomeTabPage;
             SearchTextBox.Text = "Search";
             DetailLabel.Text = "";
-        }
-
-        /// <summary>
-        /// Update all of the UI elements from here
-        /// </summary>
-        public void UpdateInterface()
-        {
             
+            LoadShortcuts();
         }
 
         // go into a folder and update the page info
@@ -116,9 +147,6 @@ namespace FileExplorer
                 prevStack.Add(page.URL);
 
                 page.URL = newUrl;
-
-                // put the next page on the stack
-                nextStack.Add(page.URL);
                 page.GetFiles();
                 page.BuildFileDGV(ref FileDGV);
             }
@@ -142,10 +170,59 @@ namespace FileExplorer
             DetailLabel.Text = "";
 
             // add all new items in
-            foreach (string d in page.FileDetail)
+            try
             {
-                DetailLabel.Text += d + "\n";
+                foreach (string d in page.FileDetail)
+                {
+                    DetailLabel.Text += d + "\n";
+                }
             }
+            catch
+            {
+
+            }
+            
+        }
+
+        // put all of the shortcuts in place in the DGV
+        private void LoadShortcuts()
+        {
+            // get the names of all certain files in the computer, this allows someone who may not have a built in shortcut
+            // still have all the shortcuts that their computer automatically gives (eg. 3D Objects not on Windows 7)
+            shortcuts = page.Directories.Select(f => f.Name.ToString())     // get all file/directory names
+                .Where(s => Backend.Constants.VALID_SHORTCUTS.Contains(s)).ToList();    // get only the valid shortcuts
+            
+            // add all shortcuts to the shortcut area
+            foreach (string s in shortcuts)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(ShortcutDGV);
+                row.Cells[0] = new DataGridViewButtonCell();
+                row.Cells[0].Value = s;
+                ShortcutDGV.Rows.Add(row);
+            }
+
+            // make all of the confirmed-to-be-valid files a full url string
+            for (int i = 0; i < shortcuts.Count(); i++)
+            {
+                shortcuts[i] = Backend.Constants.ROOT + @"\" + shortcuts[i];
+            }
+
+            // add all drives to the shortcut area
+            foreach (string d in drives)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(ShortcutDGV);
+                row.Cells[0] = new DataGridViewButtonCell();
+                row.Cells[0].Value = d;
+                ShortcutDGV.Rows.Add(row);
+
+                // add drive to list of shortcuts
+                shortcuts.Add(d);
+            }
+
+            ShortcutDGV.Refresh();
+            
         }
 
         // navigate up one directory
@@ -165,9 +242,15 @@ namespace FileExplorer
             // pop the last item in the stack (top item is last)
             string prev = prevStack.Last();
             prevStack.RemoveAt(prevStack.Count() - 1);
+            
+            // put the next page on the stack
+            nextStack.Add(page.URL);
 
             UrlTextBox.Text = prev;
             UpdatePageData();
+            
+            // remove extra item
+            prevStack.RemoveAt(prevStack.Count() - 1);
         }
 
         // go to the next item in the stack if there is one
@@ -185,11 +268,43 @@ namespace FileExplorer
             UpdatePageData();
         }
 
-        // extra methods DO NOT DELETE
-        private void FileDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        #region File
+
+        // run another instance of this program
+        private void NewWindowButton_Click(object sender, EventArgs e)
         {
+            Form1 form = new Form1();
+            form.Show();
+        }
+
+        // open powershell at the current location
+        private void PowershellButton_Click(object sender, EventArgs e)
+        {
+            // change current dir to the one the user has open
+            var temp = System.Environment.CurrentDirectory;
+            System.Environment.CurrentDirectory = page.URL;
+
+            Process.Start(Backend.Constants.POWERSHELL);
+
+            // change it back after
+            System.Environment.CurrentDirectory = temp;
 
         }
 
+        // close the program
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        #endregion
+
+        // extra methods DO NOT DELETE
+        private void FileDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        
     }
 }
