@@ -82,6 +82,7 @@
             this.FileDGV.Margin = new System.Windows.Forms.Padding(4);
             this.FileDGV.Name = "FileDGV";
             this.FileDGV.RowHeadersVisible = false;
+            this.FileDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.FileDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.FileDGV.Size = new System.Drawing.Size(603, 409);
             this.FileDGV.TabIndex = 0;
