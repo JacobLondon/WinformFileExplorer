@@ -83,14 +83,19 @@ namespace FileExplorer.Backend
             
         }
 
-        public void BuildFileDGV(ref DataGridView fileDGV)
+        // asynchronously call this to let the user browse while files are still loading in the UI
+        public void BuildFileDGV(DataGridView fileDGV)
         {
             // remove all current items
-            fileDGV.Rows.Clear();
-            
+            fileDGV.BeginInvoke((Action)(() =>
+            {
+                fileDGV.Rows.Clear();
+            }));
+
             // put all the directories in first
             foreach (DirectoryInfo d in Directories)
             {
+
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(fileDGV);
 
@@ -100,7 +105,11 @@ namespace FileExplorer.Backend
                 row.Cells[2].Value = "File Folder";
                 row.Cells[3].Value = GetDirectorySize(URL + "/" + d.Name) / 1000;
 
-                fileDGV.Rows.Add(row);
+                fileDGV.BeginInvoke((Action)(() =>
+                {
+                    fileDGV.Rows.Add(row);
+                }));
+                
             }
 
             // put in all files next
@@ -115,11 +124,17 @@ namespace FileExplorer.Backend
                 row.Cells[2].Value = f.Extension.ToString();
                 row.Cells[3].Value = f.Length / 1000;
 
-                fileDGV.Rows.Add(row);
+                fileDGV.BeginInvoke((Action)(() =>
+                {
+                    fileDGV.Rows.Add(row);
+                }));
             }
 
             // update the dgv
-            fileDGV.Refresh();
+            fileDGV.BeginInvoke((Action)(() =>
+            {
+                fileDGV.Refresh();
+            }));
         }
 
         public static long GetDirectorySize(string url)

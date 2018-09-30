@@ -54,9 +54,11 @@ namespace FileExplorer
             FileDGV.Click += FileDGV_Click;
 
             ShortcutDGV.CellContentClick += ShortcutDGV_CellContentClick;
+            SearchTextBox.GotFocus += SearchTextBox_GotFocus;
+            SearchTextBox.LostFocus += SearchTextBox_LostFocus;
+            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
         }
-
-
+        
         #region Events
 
         private void UrlTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -116,6 +118,30 @@ namespace FileExplorer
             UrlTextBox.Text = shortcuts[e.RowIndex];
             UpdatePageData();
         }
+
+        // user enters search textbox
+        private void SearchTextBox_GotFocus(object sender, EventArgs e)
+        {
+            SearchTextBox.Text = "";
+        }
+
+        // user exits search textbox
+        private void SearchTextBox_LostFocus(object sender, EventArgs e)
+        {
+            SearchTextBox.Text = "Search";
+            UpdatePageData();
+        }
+
+        // user searches for item
+        private void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+
+            }
+        }
+
+
         #endregion
 
         /// <summary>
@@ -137,7 +163,16 @@ namespace FileExplorer
         }
 
         // go into a folder and update the page info
-        private void UpdatePageData()
+        private async void UpdatePageData()
+        {
+            await Task.Run(() =>
+            {
+                AsyncUpdate();
+            });
+        }
+
+        // asynchronously call to let the user browse while the UI is still loading
+        private void AsyncUpdate()
         {
             string newUrl = UrlTextBox.Text;
 
@@ -148,9 +183,8 @@ namespace FileExplorer
 
                 page.URL = newUrl;
                 page.GetFiles();
-                page.BuildFileDGV(ref FileDGV);
+                page.BuildFileDGV(FileDGV);
             }
-
             else
             {
                 MessageBox.Show(
@@ -160,7 +194,6 @@ namespace FileExplorer
                     MessageBoxIcon.Warning);
                 UrlTextBox.Text = page.URL;
             }
-                
         }
 
         // update the right element with details of subfolders
@@ -187,6 +220,8 @@ namespace FileExplorer
         // put all of the shortcuts in place in the DGV
         private void LoadShortcuts()
         {
+            page.GetFiles();
+
             // get the names of all certain files in the computer, this allows someone who may not have a built in shortcut
             // still have all the shortcuts that their computer automatically gives (eg. 3D Objects not on Windows 7)
             shortcuts = page.Directories.Select(f => f.Name.ToString())     // get all file/directory names
