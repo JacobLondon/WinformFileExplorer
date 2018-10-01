@@ -1,4 +1,6 @@
-﻿namespace FileExplorer
+﻿using System;
+
+namespace FileExplorer
 {
     partial class Form1
     {
@@ -13,6 +15,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
+            // don't update pagedata on form dispose
+            this.disposing = false;
+            
             if (disposing && (components != null))
             {
                 components.Dispose();
@@ -322,7 +327,7 @@
             this.ShortcutDGV.AllowUserToResizeColumns = false;
             this.ShortcutDGV.AllowUserToResizeRows = false;
             this.ShortcutDGV.BackgroundColor = System.Drawing.Color.White;
-            this.ShortcutDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ShortcutDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.ShortcutDGV.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ShortcutColumn});
             this.ShortcutDGV.GridColor = System.Drawing.SystemColors.Control;

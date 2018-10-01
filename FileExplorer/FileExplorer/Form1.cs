@@ -20,6 +20,9 @@ namespace FileExplorer
         private List<string> shortcuts;
         private List<string> drives;
 
+        // a flag for detecting disposing to prevent async updates from occuring
+        public bool disposing { get; set; }
+
         public Form1()
         {
             InitializeComponent();
@@ -39,6 +42,8 @@ namespace FileExplorer
             nextStack = new List<string>();
             shortcuts = new List<string>();
             drives = Directory.GetLogicalDrives().ToList();
+
+            disposing = true;
         }
 
         /// <summary>
@@ -58,7 +63,8 @@ namespace FileExplorer
             SearchTextBox.LostFocus += SearchTextBox_LostFocus;
             SearchTextBox.KeyDown += SearchTextBox_KeyDown;
         }
-        
+
+
         #region Events
 
         private void UrlTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -115,8 +121,12 @@ namespace FileExplorer
         // click on a shortcut
         private void ShortcutDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            UrlTextBox.Text = shortcuts[e.RowIndex];
-            UpdatePageData();
+            // only update if there are valid items in the dgv
+            if(e.RowIndex >= 0)
+            {
+                UrlTextBox.Text = shortcuts[e.RowIndex];
+                UpdatePageData();
+            }
         }
 
         // user enters search textbox
@@ -128,8 +138,11 @@ namespace FileExplorer
         // user exits search textbox
         private void SearchTextBox_LostFocus(object sender, EventArgs e)
         {
-            SearchTextBox.Text = "Search";
-            UpdatePageData();
+            
+            if(SearchTextBox.Text == "")
+            {
+                UpdatePageData();
+            }
         }
 
         // user searches for item
@@ -137,10 +150,27 @@ namespace FileExplorer
         {
             if(e.KeyCode == Keys.Enter)
             {
+                string search = SearchTextBox.Text;
 
+                if(search == "")
+                {
+                    FileDGV.Focus();
+                    UpdatePageData();
+                    return;
+                }
+
+                for(int i = 0; i < FileDGV.RowCount; i++)
+                {
+                    // if the name does not contain the search
+                    if (!FileDGV.Rows[i].Cells[0].Value.ToString().Contains(search))
+                    {
+                        // remove the item displayed from the dgv
+                        FileDGV.Rows.RemoveAt(i);
+                        i--;
+                    }
+                }
             }
         }
-
 
         #endregion
 
@@ -165,10 +195,28 @@ namespace FileExplorer
         // go into a folder and update the page info
         private async void UpdatePageData()
         {
+            // reset search when updating page
+            SearchTextBox.Text = "Search";
+
+            // only update if the form is not being disposed
+            if (disposing == false)
+                return;
+
             await Task.Run(() =>
             {
                 AsyncUpdate();
             });
+
+            // remove all adjacent duplicates in prevstack
+            for(int i = 0; i < prevStack.Count(); i++)
+            {
+                // if there is a next item
+                if(i + 1 < prevStack.Count()
+                    && prevStack[i] == prevStack[i + 1])
+                {
+                    prevStack.RemoveAt(i);
+                }
+            }
         }
 
         // asynchronously call to let the user browse while the UI is still loading
@@ -256,6 +304,8 @@ namespace FileExplorer
                 shortcuts.Add(d);
             }
 
+            // user cannot sort and update the screen
+            ShortcutDGV.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             ShortcutDGV.Refresh();
             
         }
@@ -270,10 +320,16 @@ namespace FileExplorer
         // go to the previous item in the stack if there is one
         private void PreviousButton_Click(object sender, EventArgs e)
         {
+            Console.WriteLine();
+            foreach (string s in prevStack)
+            {
+                Console.WriteLine(s);
+            }
+
             // exit if there are no items
             if (prevStack.Count() <= 0)
                 return;
-
+            
             // pop the last item in the stack (top item is last)
             string prev = prevStack.Last();
             prevStack.RemoveAt(prevStack.Count() - 1);
@@ -283,9 +339,10 @@ namespace FileExplorer
 
             UrlTextBox.Text = prev;
             UpdatePageData();
-            
+
             // remove extra item
-            prevStack.RemoveAt(prevStack.Count() - 1);
+            if(prevStack.Count() > 1)
+                prevStack.RemoveAt(prevStack.Count() - 1);
         }
 
         // go to the next item in the stack if there is one

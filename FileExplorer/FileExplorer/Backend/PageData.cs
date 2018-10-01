@@ -95,7 +95,6 @@ namespace FileExplorer.Backend
             // put all the directories in first
             foreach (DirectoryInfo d in Directories)
             {
-
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(fileDGV);
 
