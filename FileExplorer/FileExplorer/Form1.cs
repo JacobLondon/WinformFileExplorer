@@ -228,19 +228,47 @@ namespace FileExplorer
             {
                 // put the previous page on the stack
                 prevStack.Add(page.URL);
-
                 page.URL = newUrl;
-                page.GetFiles();
+
+                // try to get files and directories in new directory
+                try
+                {
+                    page.GetFiles();
+                }
+                catch(UnauthorizedAccessException e)
+                {
+                    // let the user know they don't have access
+                    MessageBox.Show(
+                        e.Message,
+                        "Access Denied",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation);
+
+                    // go back to the previous url and then put the prev url in the textbox
+                    page.URL = Path.GetFullPath(Path.Combine(page.URL, @"..\"));
+                    UrlTextBox.BeginInvoke((Action)(() =>
+                    {
+                        UrlTextBox.Text = page.URL;
+                    }));
+                }
+
+                // build filedgv with all new or prev files
                 page.BuildFileDGV(FileDGV);
             }
             else
             {
+                // the url entered does not exist
                 MessageBox.Show(
                     "Directory cannot be found.",
                     "Error",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
-                UrlTextBox.Text = page.URL;
+
+                // reset the url in the textbox
+                UrlTextBox.BeginInvoke((Action)(() =>
+                {
+                    UrlTextBox.Text = page.URL;
+                }));
             }
         }
 

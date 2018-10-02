@@ -77,9 +77,19 @@ namespace FileExplorer.Backend
         public void GetFiles()
         {
             DirectoryInfo directory = new DirectoryInfo(URL);
+            
+                Files = directory.GetFiles().ToList();
+                Directories = directory.GetDirectories().ToList();
+            //catch(UnauthorizedAccessException e)
+            //{
+            //    MessageBox.Show(
+            //        "You do not have permission to access this file.",
+            //        "Access Denied",
+            //        MessageBoxButtons.OK,
+            //        MessageBoxIcon.Exclamation);
 
-            Files = directory.GetFiles().ToList();
-            Directories = directory.GetDirectories().ToList();
+            //    Path.GetFullPath(Path.Combine(URL, @"..\"));
+            //}
             
         }
 
