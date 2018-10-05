@@ -14,7 +14,7 @@ namespace FileExplorer
 {
     public partial class Form1 : Form
     {
-        private Backend.PageData page;
+        public Backend.PageData page { get; set; }
         private List<string> prevStack;
         private List<string> nextStack;
         private List<string> shortcuts;
@@ -22,6 +22,11 @@ namespace FileExplorer
 
         // a flag for detecting disposing to prevent async updates from occuring
         public bool disposing { get; set; }
+
+        // a temp public variable to access to rename files and directories
+        public string rename { get; set; }
+        // tells when the rename form is open
+        public bool RenameFormOpen { get; set; }
 
         public Form1()
         {
@@ -44,6 +49,9 @@ namespace FileExplorer
             drives = Directory.GetLogicalDrives().ToList();
 
             disposing = true;
+
+            rename = "";
+            RenameFormOpen = false;
         }
 
         /// <summary>
@@ -63,6 +71,7 @@ namespace FileExplorer
             SearchTextBox.LostFocus += SearchTextBox_LostFocus;
             SearchTextBox.KeyDown += SearchTextBox_KeyDown;
         }
+
 
 
         #region Events
@@ -99,7 +108,18 @@ namespace FileExplorer
             else
             {
                 // its a file
-                Process.Start(UrlTextBox.Text);
+                try
+                {
+                    Process.Start(UrlTextBox.Text);
+                }
+                catch(Win32Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
 
                 // reset the url to stay in the folder (can't be in a file)
                 UrlTextBox.Text = page.URL;
@@ -193,7 +213,7 @@ namespace FileExplorer
         }
 
         // go into a folder and update the page info
-        private async void UpdatePageData()
+        public async void UpdatePageData()
         {
             // reset search when updating page
             SearchTextBox.Text = "Search";
@@ -388,6 +408,12 @@ namespace FileExplorer
             UpdatePageData();
         }
 
+        // refresh the page data
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            UpdatePageData();
+        }
+
         #region File
 
         // run another instance of this program
@@ -419,12 +445,51 @@ namespace FileExplorer
 
         #endregion
 
+        #region Home
+
+        // copy directory or file
+        private void CopyButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // paste directory or file
+        private void PasteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // rename directory or file
+        private void RenameButton_Click(object sender, EventArgs e)
+        {
+            // only rename one at a time
+            if (RenameFormOpen == true)
+                return;
+
+            // get the name of the clicked item
+            string oldName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
+
+            RenameForm renameForm = new RenameForm(this, oldName);
+
+            RenameFormOpen = true;
+            renameForm.Show();
+
+            
+        }
+
+        // create a new directory
+        private void NewFolderButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
         // extra methods DO NOT DELETE
         private void FileDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
         }
 
-        
     }
 }

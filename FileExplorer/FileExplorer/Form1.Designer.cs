@@ -33,6 +33,7 @@ namespace FileExplorer
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.FileDGV = new System.Windows.Forms.DataGridView();
             this.NameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DateModifiedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,7 +48,6 @@ namespace FileExplorer
             this.HomeTabPage = new System.Windows.Forms.TabPage();
             this.NewFolderButton = new System.Windows.Forms.Button();
             this.RenameButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
             this.PasteButton = new System.Windows.Forms.Button();
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
@@ -60,6 +60,7 @@ namespace FileExplorer
             this.NextButton = new System.Windows.Forms.Button();
             this.ShortcutDGV = new System.Windows.Forms.DataGridView();
             this.ShortcutColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RefreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).BeginInit();
             this.MenuTabControl.SuspendLayout();
             this.FileTabPage.SuspendLayout();
@@ -85,6 +86,7 @@ namespace FileExplorer
             this.FileDGV.GridColor = System.Drawing.SystemColors.Control;
             this.FileDGV.Location = new System.Drawing.Point(0, 31);
             this.FileDGV.Margin = new System.Windows.Forms.Padding(4);
+            this.FileDGV.MultiSelect = false;
             this.FileDGV.Name = "FileDGV";
             this.FileDGV.RowHeadersVisible = false;
             this.FileDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -185,7 +187,6 @@ namespace FileExplorer
             this.HomeTabPage.BackColor = System.Drawing.SystemColors.Control;
             this.HomeTabPage.Controls.Add(this.NewFolderButton);
             this.HomeTabPage.Controls.Add(this.RenameButton);
-            this.HomeTabPage.Controls.Add(this.DeleteButton);
             this.HomeTabPage.Controls.Add(this.PasteButton);
             this.HomeTabPage.Controls.Add(this.CopyButton);
             this.HomeTabPage.Location = new System.Drawing.Point(4, 29);
@@ -197,30 +198,23 @@ namespace FileExplorer
             // 
             // NewFolderButton
             // 
-            this.NewFolderButton.Location = new System.Drawing.Point(558, 6);
+            this.NewFolderButton.Location = new System.Drawing.Point(420, 6);
             this.NewFolderButton.Name = "NewFolderButton";
             this.NewFolderButton.Size = new System.Drawing.Size(132, 53);
             this.NewFolderButton.TabIndex = 5;
             this.NewFolderButton.Text = "New Folder";
             this.NewFolderButton.UseVisualStyleBackColor = true;
+            this.NewFolderButton.Click += new System.EventHandler(this.NewFolderButton_Click);
             // 
             // RenameButton
             // 
-            this.RenameButton.Location = new System.Drawing.Point(420, 6);
+            this.RenameButton.Location = new System.Drawing.Point(282, 6);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(132, 53);
             this.RenameButton.TabIndex = 4;
             this.RenameButton.Text = "Rename";
             this.RenameButton.UseVisualStyleBackColor = true;
-            // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Location = new System.Drawing.Point(282, 6);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(132, 53);
-            this.DeleteButton.TabIndex = 3;
-            this.DeleteButton.Text = "Delete";
-            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.RenameButton.Click += new System.EventHandler(this.RenameButton_Click);
             // 
             // PasteButton
             // 
@@ -230,6 +224,7 @@ namespace FileExplorer
             this.PasteButton.TabIndex = 2;
             this.PasteButton.Text = "Paste";
             this.PasteButton.UseVisualStyleBackColor = true;
+            this.PasteButton.Click += new System.EventHandler(this.PasteButton_Click);
             // 
             // CopyButton
             // 
@@ -239,6 +234,7 @@ namespace FileExplorer
             this.CopyButton.TabIndex = 1;
             this.CopyButton.Text = "Copy";
             this.CopyButton.UseVisualStyleBackColor = true;
+            this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
             // 
             // SearchTextBox
             // 
@@ -292,7 +288,7 @@ namespace FileExplorer
             // 
             // UpDirectoryButton
             // 
-            this.UpDirectoryButton.Location = new System.Drawing.Point(195, 102);
+            this.UpDirectoryButton.Location = new System.Drawing.Point(335, 102);
             this.UpDirectoryButton.Name = "UpDirectoryButton";
             this.UpDirectoryButton.Size = new System.Drawing.Size(70, 23);
             this.UpDirectoryButton.TabIndex = 6;
@@ -302,7 +298,7 @@ namespace FileExplorer
             // 
             // PreviousButton
             // 
-            this.PreviousButton.Location = new System.Drawing.Point(265, 102);
+            this.PreviousButton.Location = new System.Drawing.Point(195, 102);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(70, 23);
             this.PreviousButton.TabIndex = 7;
@@ -312,7 +308,7 @@ namespace FileExplorer
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(335, 102);
+            this.NextButton.Location = new System.Drawing.Point(265, 102);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(70, 23);
             this.NextButton.TabIndex = 8;
@@ -348,12 +344,23 @@ namespace FileExplorer
             this.ShortcutColumn.ReadOnly = true;
             this.ShortcutColumn.Width = 131;
             // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Location = new System.Drawing.Point(405, 102);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(70, 23);
+            this.RefreshButton.TabIndex = 10;
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(931, 573);
+            this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.ShortcutDGV);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.PreviousButton);
@@ -361,6 +368,7 @@ namespace FileExplorer
             this.Controls.Add(this.FileTabControl);
             this.Controls.Add(this.MenuTabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Explorer";
@@ -394,7 +402,6 @@ namespace FileExplorer
         private System.Windows.Forms.Button PowershellButton;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button CopyButton;
-        private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.Button PasteButton;
         private System.Windows.Forms.Button NewFolderButton;
         private System.Windows.Forms.Button RenameButton;
@@ -408,6 +415,7 @@ namespace FileExplorer
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.DataGridView ShortcutDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShortcutColumn;
+        private System.Windows.Forms.Button RefreshButton;
     }
 }
 

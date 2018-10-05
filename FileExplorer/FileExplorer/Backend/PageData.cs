@@ -11,7 +11,7 @@ namespace FileExplorer.Backend
     /// <summary>
     /// All of the relevant information about a page is defined here
     /// </summary>
-    class PageData
+    public class PageData
     {
         // the url of the current location
         public string URL { get; set; }

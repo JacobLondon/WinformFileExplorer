@@ -28,3 +28,4 @@ C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplo
 C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csproj.CoreCompileInputs.cache
 C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe
 C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.pdb
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.RenameForm.resources
