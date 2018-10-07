@@ -29,5 +29,6 @@ namespace FileExplorer.Backend
         };
 
         public static string TIME_FORMAT = "MM/dd/yyyy hh:mm tt";
+        public static string NEW_FOLDER = "New folder";
     }
 }

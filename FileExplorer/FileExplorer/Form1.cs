@@ -47,7 +47,7 @@ namespace FileExplorer
             nextStack = new List<string>();
             shortcuts = new List<string>();
             drives = Directory.GetLogicalDrives().ToList();
-
+            
             disposing = true;
 
             rename = "";
@@ -132,6 +132,10 @@ namespace FileExplorer
         // show details of the folder
         private void FileDGV_Click(object sender, EventArgs e)
         {
+            // do nothing if there are no files or directories
+            if (FileDGV.RowCount <= 0)
+                return;
+
             // get the name of the clicked item
             string itemName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
             page.GetFileDetails(page.URL + @"\" + itemName);
@@ -208,7 +212,8 @@ namespace FileExplorer
             MenuTabControl.SelectedTab = HomeTabPage;
             SearchTextBox.Text = "Search";
             DetailLabel.Text = "";
-            
+            HiddenFilesCheckBox.CheckState = CheckState.Unchecked;
+
             LoadShortcuts();
         }
 
@@ -273,7 +278,7 @@ namespace FileExplorer
                 }
 
                 // build filedgv with all new or prev files
-                page.BuildFileDGV(FileDGV);
+                page.BuildFileDGV(FileDGV, HiddenFilesCheckBox.CheckState);
             }
             else
             {
@@ -450,18 +455,71 @@ namespace FileExplorer
         // copy directory or file
         private void CopyButton_Click(object sender, EventArgs e)
         {
+            // exit if there are no files
+            if (FileDGV.RowCount <= 0)
+                return;
 
+            string itemToCopy = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
+            System.Windows.Forms.Clipboard.SetText(UrlTextBox.Text + @"\" + itemToCopy);
         }
 
         // paste directory or file
         private void PasteButton_Click(object sender, EventArgs e)
         {
+            // get the name of the selected item
+            string copiedItemPath = System.Windows.Forms.Clipboard.GetText();
+            string pathOfItem;
 
+            // find if there are repeats of the current copied item in the current directory
+            int count = CountOccurrences(copiedItemPath);
+
+            // get the file attributes for file or directory
+            FileAttributes attr = File.GetAttributes(copiedItemPath);
+
+            // check to see if there is already an item with the same name
+            if (count > 0)
+            {
+                DialogResult result = MessageBox.Show(
+                    $"Directory {copiedItemPath} already exists. Rename to '{copiedItemPath} ({count})'?",
+                    "Warning",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
+
+            // detect whether its a directory or file
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                pathOfItem = UrlTextBox.Text + @"\" + new DirectoryInfo(copiedItemPath).Name;
+
+                // paste directory
+                new Microsoft.VisualBasic.Devices.Computer().FileSystem.CopyDirectory(
+                    copiedItemPath,
+                    pathOfItem);
+            }
+            else
+            {
+                pathOfItem = UrlTextBox.Text + @"\" + new FileInfo(copiedItemPath).Name;
+
+                // paste file
+                new Microsoft.VisualBasic.Devices.Computer().FileSystem.CopyFile(
+                    copiedItemPath,
+                    pathOfItem);
+            }
+            UpdatePageData();
         }
 
         // rename directory or file
         private void RenameButton_Click(object sender, EventArgs e)
         {
+            // exit if there are no files
+            if (FileDGV.RowCount <= 0)
+                return;
+
             // only rename one at a time
             if (RenameFormOpen == true)
                 return;
@@ -477,10 +535,72 @@ namespace FileExplorer
             
         }
 
+        // delete selected file or directory
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            // exit if there are no files
+            if (FileDGV.RowCount <= 0)
+                return;
+
+            // get the name of the selected item
+            string itemToDelete = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
+            string pathOfItem = UrlTextBox.Text + @"\" + itemToDelete;
+
+            // get the file attributes for file or directory
+            FileAttributes attr = File.GetAttributes(pathOfItem);
+
+            // detect whether its a directory or file
+            if (attr.HasFlag(FileAttributes.Directory))
+            {
+                // move directory to recycle bin
+                Microsoft.VisualBasic.FileIO.FileSystem.DeleteDirectory(
+                    pathOfItem,
+                    Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                    Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin,
+                    Microsoft.VisualBasic.FileIO.UICancelOption.ThrowException);
+            }
+            else
+            {
+                // move file to recycle bin
+                Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(
+                    pathOfItem,
+                    Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs,
+                    Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin,
+                    Microsoft.VisualBasic.FileIO.UICancelOption.ThrowException);
+            }
+            UpdatePageData();
+        }
+
         // create a new directory
         private void NewFolderButton_Click(object sender, EventArgs e)
         {
+            int count = CountOccurrences(Backend.Constants.NEW_FOLDER);
 
+            // create the new folder and update the interface
+            Directory.CreateDirectory(page.URL + @"\" + Backend.Constants.NEW_FOLDER + (count == 0 ? "" : $" ({count})"));
+            UpdatePageData();
+            
+        }
+
+        private int CountOccurrences(string path)
+        {
+            bool exists;
+            int count = 0;
+
+            // find the number of new folders created to make: "New folder (#)" if there are more than 1
+            do
+            {
+                exists = Directory.Exists(page.URL + @"\" + path + (count == 0 ? "" : $" ({count})"));
+                count = exists ? count + 1 : count;
+            } while (exists == true);
+
+            return count;
+        }
+
+        // update the page after changing the checked box
+        private void HiddenFilesCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            UpdatePageData();
         }
 
         #endregion
@@ -491,5 +611,6 @@ namespace FileExplorer
             
         }
 
+        
     }
 }

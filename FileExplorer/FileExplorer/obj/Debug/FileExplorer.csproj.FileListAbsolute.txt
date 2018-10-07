@@ -29,3 +29,18 @@ C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplo
 C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe
 C:\Users\jelon\Documents\C# Workspace\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.pdb
 F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.RenameForm.resources
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe.config
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.pdb
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csprojAssemblyReference.cache
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.Form1.resources
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.Properties.Resources.resources
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.RenameForm.resources
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csproj.GenerateResource.cache
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.csproj.CoreCompileInputs.cache
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.pdb
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe.manifest
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.application
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe.manifest
+D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.application

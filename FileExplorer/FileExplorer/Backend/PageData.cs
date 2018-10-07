@@ -94,7 +94,7 @@ namespace FileExplorer.Backend
         }
 
         // asynchronously call this to let the user browse while files are still loading in the UI
-        public void BuildFileDGV(DataGridView fileDGV)
+        public void BuildFileDGV(DataGridView fileDGV, CheckState state)
         {
             // remove all current items
             fileDGV.BeginInvoke((Action)(() =>
@@ -110,6 +110,11 @@ namespace FileExplorer.Backend
 
                 // add values to each column
                 row.Cells[0].Value = d.Name.ToString();
+
+                // don't load hidden files
+                if (d.Name.ToString().StartsWith(".") && state == CheckState.Unchecked)
+                    continue;
+
                 row.Cells[1].Value = d.LastWriteTimeUtc.ToString(Backend.Constants.TIME_FORMAT);
                 row.Cells[2].Value = "File Folder";
                 row.Cells[3].Value = GetDirectorySize(URL + "/" + d.Name) / 1000;

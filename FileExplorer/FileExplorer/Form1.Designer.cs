@@ -61,6 +61,8 @@ namespace FileExplorer
             this.ShortcutDGV = new System.Windows.Forms.DataGridView();
             this.ShortcutColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefreshButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.HiddenFilesCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).BeginInit();
             this.MenuTabControl.SuspendLayout();
             this.FileTabPage.SuspendLayout();
@@ -185,6 +187,8 @@ namespace FileExplorer
             // HomeTabPage
             // 
             this.HomeTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.HomeTabPage.Controls.Add(this.HiddenFilesCheckBox);
+            this.HomeTabPage.Controls.Add(this.DeleteButton);
             this.HomeTabPage.Controls.Add(this.NewFolderButton);
             this.HomeTabPage.Controls.Add(this.RenameButton);
             this.HomeTabPage.Controls.Add(this.PasteButton);
@@ -198,7 +202,7 @@ namespace FileExplorer
             // 
             // NewFolderButton
             // 
-            this.NewFolderButton.Location = new System.Drawing.Point(420, 6);
+            this.NewFolderButton.Location = new System.Drawing.Point(558, 6);
             this.NewFolderButton.Name = "NewFolderButton";
             this.NewFolderButton.Size = new System.Drawing.Size(132, 53);
             this.NewFolderButton.TabIndex = 5;
@@ -208,7 +212,7 @@ namespace FileExplorer
             // 
             // RenameButton
             // 
-            this.RenameButton.Location = new System.Drawing.Point(282, 6);
+            this.RenameButton.Location = new System.Drawing.Point(420, 6);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(132, 53);
             this.RenameButton.TabIndex = 4;
@@ -354,6 +358,27 @@ namespace FileExplorer
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(282, 6);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(132, 53);
+            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // HiddenFilesCheckBox
+            // 
+            this.HiddenFilesCheckBox.AutoSize = true;
+            this.HiddenFilesCheckBox.Location = new System.Drawing.Point(753, 21);
+            this.HiddenFilesCheckBox.Name = "HiddenFilesCheckBox";
+            this.HiddenFilesCheckBox.Size = new System.Drawing.Size(146, 24);
+            this.HiddenFilesCheckBox.TabIndex = 7;
+            this.HiddenFilesCheckBox.Text = "View hidden files";
+            this.HiddenFilesCheckBox.UseVisualStyleBackColor = true;
+            this.HiddenFilesCheckBox.CheckedChanged += new System.EventHandler(this.HiddenFilesCheckBox_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -377,6 +402,7 @@ namespace FileExplorer
             this.MenuTabControl.ResumeLayout(false);
             this.FileTabPage.ResumeLayout(false);
             this.HomeTabPage.ResumeLayout(false);
+            this.HomeTabPage.PerformLayout();
             this.FileTabControl.ResumeLayout(false);
             this.DefaultTabPage.ResumeLayout(false);
             this.DefaultTabPage.PerformLayout();
@@ -416,6 +442,8 @@ namespace FileExplorer
         private System.Windows.Forms.DataGridView ShortcutDGV;
         private System.Windows.Forms.DataGridViewTextBoxColumn ShortcutColumn;
         private System.Windows.Forms.Button RefreshButton;
+        private System.Windows.Forms.Button DeleteButton;
+        private System.Windows.Forms.CheckBox HiddenFilesCheckBox;
     }
 }
 
