@@ -46,30 +46,24 @@ namespace FileExplorer
             this.PowershellButton = new System.Windows.Forms.Button();
             this.NewWindowButton = new System.Windows.Forms.Button();
             this.HomeTabPage = new System.Windows.Forms.TabPage();
+            this.HiddenFilesCheckBox = new System.Windows.Forms.CheckBox();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.NewFolderButton = new System.Windows.Forms.Button();
             this.RenameButton = new System.Windows.Forms.Button();
             this.PasteButton = new System.Windows.Forms.Button();
             this.CopyButton = new System.Windows.Forms.Button();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
-            this.FileTabControl = new System.Windows.Forms.TabControl();
-            this.DefaultTabPage = new System.Windows.Forms.TabPage();
-            this.FileDetailGroupBox = new System.Windows.Forms.GroupBox();
-            this.DetailLabel = new System.Windows.Forms.Label();
+            this.FileTreeView = new System.Windows.Forms.TreeView();
             this.UpDirectoryButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.ShortcutDGV = new System.Windows.Forms.DataGridView();
             this.ShortcutColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.RefreshButton = new System.Windows.Forms.Button();
-            this.DeleteButton = new System.Windows.Forms.Button();
-            this.HiddenFilesCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.FileDGV)).BeginInit();
             this.MenuTabControl.SuspendLayout();
             this.FileTabPage.SuspendLayout();
             this.HomeTabPage.SuspendLayout();
-            this.FileTabControl.SuspendLayout();
-            this.DefaultTabPage.SuspendLayout();
-            this.FileDetailGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShortcutDGV)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +80,7 @@ namespace FileExplorer
             this.TypeColumn,
             this.SizeColumn});
             this.FileDGV.GridColor = System.Drawing.SystemColors.Control;
-            this.FileDGV.Location = new System.Drawing.Point(0, 31);
+            this.FileDGV.Location = new System.Drawing.Point(145, 159);
             this.FileDGV.Margin = new System.Windows.Forms.Padding(4);
             this.FileDGV.MultiSelect = false;
             this.FileDGV.Name = "FileDGV";
@@ -125,7 +119,7 @@ namespace FileExplorer
             // 
             // UrlTextBox
             // 
-            this.UrlTextBox.Location = new System.Drawing.Point(0, 6);
+            this.UrlTextBox.Location = new System.Drawing.Point(145, 130);
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(603, 22);
             this.UrlTextBox.TabIndex = 1;
@@ -138,7 +132,7 @@ namespace FileExplorer
             this.MenuTabControl.Location = new System.Drawing.Point(-3, -2);
             this.MenuTabControl.Name = "MenuTabControl";
             this.MenuTabControl.SelectedIndex = 0;
-            this.MenuTabControl.Size = new System.Drawing.Size(934, 99);
+            this.MenuTabControl.Size = new System.Drawing.Size(986, 99);
             this.MenuTabControl.TabIndex = 3;
             // 
             // FileTabPage
@@ -150,7 +144,7 @@ namespace FileExplorer
             this.FileTabPage.Location = new System.Drawing.Point(4, 29);
             this.FileTabPage.Name = "FileTabPage";
             this.FileTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FileTabPage.Size = new System.Drawing.Size(926, 66);
+            this.FileTabPage.Size = new System.Drawing.Size(978, 66);
             this.FileTabPage.TabIndex = 1;
             this.FileTabPage.Text = "  File";
             // 
@@ -200,6 +194,27 @@ namespace FileExplorer
             this.HomeTabPage.TabIndex = 0;
             this.HomeTabPage.Text = "Home";
             // 
+            // HiddenFilesCheckBox
+            // 
+            this.HiddenFilesCheckBox.AutoSize = true;
+            this.HiddenFilesCheckBox.Location = new System.Drawing.Point(753, 21);
+            this.HiddenFilesCheckBox.Name = "HiddenFilesCheckBox";
+            this.HiddenFilesCheckBox.Size = new System.Drawing.Size(146, 24);
+            this.HiddenFilesCheckBox.TabIndex = 7;
+            this.HiddenFilesCheckBox.Text = "View hidden files";
+            this.HiddenFilesCheckBox.UseVisualStyleBackColor = true;
+            this.HiddenFilesCheckBox.CheckedChanged += new System.EventHandler(this.HiddenFilesCheckBox_CheckedChanged);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(282, 6);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(132, 53);
+            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // NewFolderButton
             // 
             this.NewFolderButton.Location = new System.Drawing.Point(558, 6);
@@ -243,56 +258,21 @@ namespace FileExplorer
             // SearchTextBox
             // 
             this.SearchTextBox.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.SearchTextBox.Location = new System.Drawing.Point(609, 6);
+            this.SearchTextBox.Location = new System.Drawing.Point(754, 130);
             this.SearchTextBox.Name = "SearchTextBox";
-            this.SearchTextBox.Size = new System.Drawing.Size(170, 22);
+            this.SearchTextBox.Size = new System.Drawing.Size(225, 22);
             this.SearchTextBox.TabIndex = 4;
             // 
-            // FileTabControl
+            // FileTreeView
             // 
-            this.FileTabControl.Controls.Add(this.DefaultTabPage);
-            this.FileTabControl.Location = new System.Drawing.Point(141, 103);
-            this.FileTabControl.Name = "FileTabControl";
-            this.FileTabControl.SelectedIndex = 0;
-            this.FileTabControl.Size = new System.Drawing.Size(790, 469);
-            this.FileTabControl.TabIndex = 5;
-            // 
-            // DefaultTabPage
-            // 
-            this.DefaultTabPage.Controls.Add(this.FileDetailGroupBox);
-            this.DefaultTabPage.Controls.Add(this.FileDGV);
-            this.DefaultTabPage.Controls.Add(this.SearchTextBox);
-            this.DefaultTabPage.Controls.Add(this.UrlTextBox);
-            this.DefaultTabPage.Location = new System.Drawing.Point(4, 25);
-            this.DefaultTabPage.Name = "DefaultTabPage";
-            this.DefaultTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.DefaultTabPage.Size = new System.Drawing.Size(782, 440);
-            this.DefaultTabPage.TabIndex = 0;
-            this.DefaultTabPage.Text = "Home";
-            this.DefaultTabPage.UseVisualStyleBackColor = true;
-            // 
-            // FileDetailGroupBox
-            // 
-            this.FileDetailGroupBox.Controls.Add(this.DetailLabel);
-            this.FileDetailGroupBox.Location = new System.Drawing.Point(609, 35);
-            this.FileDetailGroupBox.Name = "FileDetailGroupBox";
-            this.FileDetailGroupBox.Size = new System.Drawing.Size(170, 405);
-            this.FileDetailGroupBox.TabIndex = 5;
-            this.FileDetailGroupBox.TabStop = false;
-            this.FileDetailGroupBox.Text = "File Detail";
-            // 
-            // DetailLabel
-            // 
-            this.DetailLabel.AutoSize = true;
-            this.DetailLabel.Location = new System.Drawing.Point(6, 18);
-            this.DetailLabel.Name = "DetailLabel";
-            this.DetailLabel.Size = new System.Drawing.Size(77, 16);
-            this.DetailLabel.TabIndex = 0;
-            this.DetailLabel.Text = "DetailLabel";
+            this.FileTreeView.Location = new System.Drawing.Point(754, 158);
+            this.FileTreeView.Name = "FileTreeView";
+            this.FileTreeView.Size = new System.Drawing.Size(225, 410);
+            this.FileTreeView.TabIndex = 0;
             // 
             // UpDirectoryButton
             // 
-            this.UpDirectoryButton.Location = new System.Drawing.Point(335, 102);
+            this.UpDirectoryButton.Location = new System.Drawing.Point(285, 102);
             this.UpDirectoryButton.Name = "UpDirectoryButton";
             this.UpDirectoryButton.Size = new System.Drawing.Size(70, 23);
             this.UpDirectoryButton.TabIndex = 6;
@@ -302,7 +282,7 @@ namespace FileExplorer
             // 
             // PreviousButton
             // 
-            this.PreviousButton.Location = new System.Drawing.Point(195, 102);
+            this.PreviousButton.Location = new System.Drawing.Point(145, 102);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(70, 23);
             this.PreviousButton.TabIndex = 7;
@@ -312,7 +292,7 @@ namespace FileExplorer
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(265, 102);
+            this.NextButton.Location = new System.Drawing.Point(215, 102);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(70, 23);
             this.NextButton.TabIndex = 8;
@@ -350,7 +330,7 @@ namespace FileExplorer
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(405, 102);
+            this.RefreshButton.Location = new System.Drawing.Point(355, 102);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(70, 23);
             this.RefreshButton.TabIndex = 10;
@@ -358,39 +338,21 @@ namespace FileExplorer
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // DeleteButton
-            // 
-            this.DeleteButton.Location = new System.Drawing.Point(282, 6);
-            this.DeleteButton.Name = "DeleteButton";
-            this.DeleteButton.Size = new System.Drawing.Size(132, 53);
-            this.DeleteButton.TabIndex = 6;
-            this.DeleteButton.Text = "Delete";
-            this.DeleteButton.UseVisualStyleBackColor = true;
-            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // HiddenFilesCheckBox
-            // 
-            this.HiddenFilesCheckBox.AutoSize = true;
-            this.HiddenFilesCheckBox.Location = new System.Drawing.Point(753, 21);
-            this.HiddenFilesCheckBox.Name = "HiddenFilesCheckBox";
-            this.HiddenFilesCheckBox.Size = new System.Drawing.Size(146, 24);
-            this.HiddenFilesCheckBox.TabIndex = 7;
-            this.HiddenFilesCheckBox.Text = "View hidden files";
-            this.HiddenFilesCheckBox.UseVisualStyleBackColor = true;
-            this.HiddenFilesCheckBox.CheckedChanged += new System.EventHandler(this.HiddenFilesCheckBox_CheckedChanged);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(931, 573);
+            this.ClientSize = new System.Drawing.Size(983, 572);
+            this.Controls.Add(this.UrlTextBox);
+            this.Controls.Add(this.SearchTextBox);
+            this.Controls.Add(this.FileTreeView);
             this.Controls.Add(this.RefreshButton);
+            this.Controls.Add(this.FileDGV);
             this.Controls.Add(this.ShortcutDGV);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.PreviousButton);
             this.Controls.Add(this.UpDirectoryButton);
-            this.Controls.Add(this.FileTabControl);
             this.Controls.Add(this.MenuTabControl);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -403,13 +365,9 @@ namespace FileExplorer
             this.FileTabPage.ResumeLayout(false);
             this.HomeTabPage.ResumeLayout(false);
             this.HomeTabPage.PerformLayout();
-            this.FileTabControl.ResumeLayout(false);
-            this.DefaultTabPage.ResumeLayout(false);
-            this.DefaultTabPage.PerformLayout();
-            this.FileDetailGroupBox.ResumeLayout(false);
-            this.FileDetailGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ShortcutDGV)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -421,9 +379,6 @@ namespace FileExplorer
         private System.Windows.Forms.TabPage HomeTabPage;
         private System.Windows.Forms.TabPage FileTabPage;
         private System.Windows.Forms.TextBox SearchTextBox;
-        private System.Windows.Forms.TabControl FileTabControl;
-        private System.Windows.Forms.TabPage DefaultTabPage;
-        private System.Windows.Forms.GroupBox FileDetailGroupBox;
         private System.Windows.Forms.Button NewWindowButton;
         private System.Windows.Forms.Button PowershellButton;
         private System.Windows.Forms.Button CloseButton;
@@ -436,7 +391,6 @@ namespace FileExplorer
         private System.Windows.Forms.DataGridViewTextBoxColumn DateModifiedColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeColumn;
-        private System.Windows.Forms.Label DetailLabel;
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.DataGridView ShortcutDGV;
@@ -444,6 +398,7 @@ namespace FileExplorer
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.Button DeleteButton;
         private System.Windows.Forms.CheckBox HiddenFilesCheckBox;
+        private System.Windows.Forms.TreeView FileTreeView;
     }
 }
 

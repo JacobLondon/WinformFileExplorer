@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FileExplorer.Backend
@@ -27,6 +28,10 @@ namespace FileExplorer.Backend
             "Pictures",
             "Videos"
         };
+
+        // renaming a file may not contain these chars
+        public static string INVALID_CHARS = "[<>:\"/\\\\|?*]";
+        public static Regex INVALID_REGEX = new Regex(INVALID_CHARS);
 
         public static string TIME_FORMAT = "MM/dd/yyyy hh:mm tt";
         public static string NEW_FOLDER = "New folder";

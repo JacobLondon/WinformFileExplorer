@@ -56,6 +56,18 @@ namespace FileExplorer
 
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
+            // only rename if the text has valid chars
+            if (Backend.Constants.INVALID_REGEX.IsMatch(NewNameTextBox.Text))
+            {
+                MessageBox.Show(
+                    "Files may not contain the following characters:\n" + Backend.Constants.INVALID_CHARS,
+                    "Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                
+                return;
+            }
+
             FileInfo old = new FileInfo(Form.page.URL + @"\" + OldName);
             NewName = NewNameTextBox.Text;
             Form.rename = NewName;

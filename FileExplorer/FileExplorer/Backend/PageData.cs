@@ -50,9 +50,18 @@ namespace FileExplorer.Backend
         /// </summary>
         public void GetFileDetails(string folderName)
         {
+            FileAttributes attr; //= File.GetAttributes(folderName);
+
             // check if the folder appended to the URL is a directory
-            //string path = URL + @"\" + folderName;
-            FileAttributes attr = File.GetAttributes(folderName);
+            try
+            {
+                attr = File.GetAttributes(folderName);
+            }
+            catch(FileNotFoundException)
+            {
+                return;
+            }
+            
 
             if ((attr & FileAttributes.Directory) == FileAttributes.Directory)
             {
@@ -78,8 +87,8 @@ namespace FileExplorer.Backend
         {
             DirectoryInfo directory = new DirectoryInfo(URL);
             
-                Files = directory.GetFiles().ToList();
-                Directories = directory.GetDirectories().ToList();
+            Files = directory.GetFiles().ToList();
+            Directories = directory.GetDirectories().ToList();
             //catch(UnauthorizedAccessException e)
             //{
             //    MessageBox.Show(

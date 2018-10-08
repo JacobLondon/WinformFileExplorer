@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Threading;
 
 namespace FileExplorer
 {
@@ -70,9 +71,9 @@ namespace FileExplorer
             SearchTextBox.GotFocus += SearchTextBox_GotFocus;
             SearchTextBox.LostFocus += SearchTextBox_LostFocus;
             SearchTextBox.KeyDown += SearchTextBox_KeyDown;
+
+            FileTreeView.DoubleClick += FileTreeView_DoubleClick;
         }
-
-
 
         #region Events
 
@@ -90,12 +91,39 @@ namespace FileExplorer
         // go into the folder
         private void FileDGV_DoubleClick(object sender, EventArgs e)
         {
+            if (FileDGV.RowCount <= 0)
+                return;
+
             // get the name of the double clicked item
-            string itemName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
+            string itemName;
+            try
+            {
+                itemName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
+            }
+            catch
+            {
+                return;
+            }
 
             UrlTextBox.Text += @"\" + itemName;
-            DetailLabel.Text = "";
 
+            try
+            {
+                OpenFileOrDirectory();
+            }
+            catch
+            {
+                UrlTextBox.Text = page.URL;
+                FileTreeView.Nodes.Clear();
+                return;
+            }
+            
+            // forward cannot go if a file is double clicked
+            nextStack.Clear();
+        }
+        
+        public void OpenFileOrDirectory()
+        {
             // get the file attributes for file or directory
             FileAttributes attr = File.GetAttributes(UrlTextBox.Text);
 
@@ -112,8 +140,12 @@ namespace FileExplorer
                 {
                     Process.Start(UrlTextBox.Text);
                 }
-                catch(Win32Exception ex)
+                catch (Exception ex)
                 {
+                    // reset the url to stay in the folder (can't be in a file)
+                    UrlTextBox.Text = page.URL;
+                    FileTreeView.Nodes.Clear();
+
                     MessageBox.Show(
                         ex.Message,
                         "Error",
@@ -124,22 +156,23 @@ namespace FileExplorer
                 // reset the url to stay in the folder (can't be in a file)
                 UrlTextBox.Text = page.URL;
             }
-
-            // forward cannot go if a file is double clicked
-            nextStack.Clear();
         }
-        
+
         // show details of the folder
         private void FileDGV_Click(object sender, EventArgs e)
         {
             // do nothing if there are no files or directories
-            if (FileDGV.RowCount <= 0)
+            if (FileDGV.RowCount <= 0 || FileDGV.SelectedRows.Count <= 0)
                 return;
+
+            FileTreeView.Nodes.Clear();
 
             // get the name of the clicked item
             string itemName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
             page.GetFileDetails(page.URL + @"\" + itemName);
-            UpdatePageDetails();
+            
+            LoadDirectory(page.URL + @"\" + itemName);
+            FileTreeView.Refresh();
         }
 
         // click on a shortcut
@@ -211,7 +244,6 @@ namespace FileExplorer
 
             MenuTabControl.SelectedTab = HomeTabPage;
             SearchTextBox.Text = "Search";
-            DetailLabel.Text = "";
             HiddenFilesCheckBox.CheckState = CheckState.Unchecked;
 
             LoadShortcuts();
@@ -242,6 +274,9 @@ namespace FileExplorer
                     prevStack.RemoveAt(i);
                 }
             }
+
+            FileDGV.ClearSelection();
+            FileTreeView.Nodes.Clear();
         }
 
         // asynchronously call to let the user browse while the UI is still loading
@@ -297,26 +332,95 @@ namespace FileExplorer
             }
         }
 
-        // update the right element with details of subfolders
-        private void UpdatePageDetails()
-        {
-            // clear all previous items
-            DetailLabel.Text = "";
+        #region Page Details
 
-            // add all new items in
+        // https://www.c-sharpcorner.com/article/display-sub-directories-and-files-in-treeview/
+        // load all items into the tree
+        public void LoadDirectory(string dir)
+        {
+            DirectoryInfo rootdir = new DirectoryInfo(dir);
+
+            TreeNode subTreeNode = FileTreeView.Nodes.Add(rootdir.Name);
+            subTreeNode.Tag = rootdir.FullName;
+            subTreeNode.StateImageIndex = 0;
+
+            // try to load all directories and files in the treeview
             try
             {
-                foreach (string d in page.FileDetail)
+                LoadSubDirectories(dir, subTreeNode);
+                LoadFiles(dir, subTreeNode);
+
+                // expand the first child always
+                foreach (TreeNode tn in FileTreeView.Nodes)
                 {
-                    DetailLabel.Text += d + "\n";
+                    tn.Expand();
                 }
             }
             catch
             {
-
+                FileTreeView.Nodes.Clear();
+                return;
             }
             
         }
+
+        // load all sub directories into the tree
+        private void LoadSubDirectories(string dir, TreeNode treeNode)
+        {
+            // Get all subdirectories  
+            string[] subdirectoryEntries = Directory.GetDirectories(dir);
+
+            // Loop through them to see if they have any other subdirectories  
+            foreach (string subdirectory in subdirectoryEntries)
+            {
+                DirectoryInfo subdir = new DirectoryInfo(subdirectory);
+                TreeNode subTreeNode = new TreeNode();
+                
+                subTreeNode = treeNode.Nodes.Add(subdir.Name);
+                    
+                subTreeNode.StateImageIndex = 0;
+                subTreeNode.Tag = subdir.FullName;
+
+                // recursively get all sub files/directories
+                //LoadFiles(subdirectory, subTreeNode);
+                //LoadSubDirectories(subdirectory, subTreeNode);
+            }
+        }
+        
+        // load all sub files into the tree
+        private void LoadFiles(string dir, TreeNode td)
+        {
+            string[] Files = Directory.GetFiles(dir, "*.*");
+
+            // Loop through them to see files  
+            foreach (string file in Files)
+            {
+                FileInfo fi = new FileInfo(file);
+                TreeNode tds = new TreeNode();
+                
+                tds = td.Nodes.Add(fi.Name);
+                    
+                tds.Tag = fi.FullName;
+                tds.StateImageIndex = 1;
+            }
+        }
+        
+        // open the file location if double clicked
+        private void FileTreeView_DoubleClick(object sender, EventArgs e)
+        {
+            // Get the node at the current mouse pointer location.  
+            TreeNode selectedNode = FileTreeView.GetNodeAt(((MouseEventArgs)e).X, ((MouseEventArgs)e).Y);
+
+            // Set a ToolTip only if the mouse pointer is actually paused on a node.  
+            if (selectedNode != null && selectedNode.Tag != null)
+            {
+                // put the selected item in the textbox and open it
+                UrlTextBox.Text = selectedNode.Tag.ToString();
+                OpenFileOrDirectory();
+            }
+        }
+
+        #endregion
 
         // put all of the shortcuts in place in the DGV
         private void LoadShortcuts()
@@ -344,6 +448,14 @@ namespace FileExplorer
                 shortcuts[i] = Backend.Constants.ROOT + @"\" + shortcuts[i];
             }
 
+            // custom user shortcut
+            DataGridViewRow userRow = new DataGridViewRow();
+            userRow.CreateCells(ShortcutDGV);
+            userRow.Cells[0] = new DataGridViewButtonCell();
+            userRow.Cells[0].Value = Environment.UserName;
+            ShortcutDGV.Rows.Add(userRow);
+            shortcuts.Add(Backend.Constants.ROOT);
+
             // add all drives to the shortcut area
             foreach (string d in drives)
             {
@@ -356,7 +468,7 @@ namespace FileExplorer
                 // add drive to list of shortcuts
                 shortcuts.Add(d);
             }
-
+            
             // user cannot sort and update the screen
             ShortcutDGV.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
             ShortcutDGV.Refresh();

@@ -44,3 +44,7 @@ D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileE
 D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.application
 D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe.manifest
 D:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.application
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.exe.manifest
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\bin\Debug\FileExplorer.application
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.exe.manifest
+F:\Programs\C#\ECE 4310 Operating Systems\WinformFileExplorer\FileExplorer\FileExplorer\obj\Debug\FileExplorer.application

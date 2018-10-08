@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FileExplorer.exe" size="105952">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="FileExplorer.exe" size="106464">
       <assemblyIdentity name="FileExplorer" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UvSCN868FY/ah/VeSAuy8+klycbW/CX6kKal42YhtTw=</dsig:DigestValue>
+        <dsig:DigestValue>wsM3vJ6uHjIGhHhmo1tW4duJGzQ0NIeJQTVHho/dGyA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
