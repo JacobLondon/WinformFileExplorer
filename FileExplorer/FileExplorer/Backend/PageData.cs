@@ -89,16 +89,6 @@ namespace FileExplorer.Backend
             
             Files = directory.GetFiles().ToList();
             Directories = directory.GetDirectories().ToList();
-            //catch(UnauthorizedAccessException e)
-            //{
-            //    MessageBox.Show(
-            //        "You do not have permission to access this file.",
-            //        "Access Denied",
-            //        MessageBoxButtons.OK,
-            //        MessageBoxIcon.Exclamation);
-
-            //    Path.GetFullPath(Path.Combine(URL, @"..\"));
-            //}
             
         }
 

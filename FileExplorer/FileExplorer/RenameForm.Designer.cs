@@ -122,6 +122,6 @@
         private System.Windows.Forms.Label EnterNameLabel;
         private System.Windows.Forms.TextBox NewNameTextBox;
         private System.Windows.Forms.Button ConfirmButton;
-        private System.Windows.Forms.Button CancelButton;
+        private new System.Windows.Forms.Button CancelButton;
     }
 }

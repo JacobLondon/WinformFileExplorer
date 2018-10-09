@@ -29,6 +29,8 @@ namespace FileExplorer
         // tells when the rename form is open
         public bool RenameFormOpen { get; set; }
 
+        private bool loadingPrevious;
+
         public Form1()
         {
             InitializeComponent();
@@ -53,6 +55,8 @@ namespace FileExplorer
 
             rename = "";
             RenameFormOpen = false;
+
+            loadingPrevious = false;
         }
 
         /// <summary>
@@ -75,7 +79,7 @@ namespace FileExplorer
             FileTreeView.DoubleClick += FileTreeView_DoubleClick;
         }
 
-        #region Events
+        #region Custom Events
 
         private void UrlTextBox_KeyDown(object sender, KeyEventArgs e)
         {
@@ -195,7 +199,6 @@ namespace FileExplorer
         // user exits search textbox
         private void SearchTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             if(SearchTextBox.Text == "")
             {
                 UpdatePageData();
@@ -215,11 +218,11 @@ namespace FileExplorer
                     UpdatePageData();
                     return;
                 }
-
+                
                 for(int i = 0; i < FileDGV.RowCount; i++)
                 {
-                    // if the name does not contain the search
-                    if (!FileDGV.Rows[i].Cells[0].Value.ToString().Contains(search))
+                    // if the name does not contain the search (ignore case sensitivity)
+                    if (!FileDGV.Rows[i].Cells[0].Value.ToString().ToLower().Contains(search.ToLower()))
                     {
                         // remove the item displayed from the dgv
                         FileDGV.Rows.RemoveAt(i);
@@ -230,6 +233,8 @@ namespace FileExplorer
         }
 
         #endregion
+
+        #region Update
 
         /// <summary>
         /// Things to do only on startup
@@ -287,7 +292,8 @@ namespace FileExplorer
             if (Directory.Exists(newUrl))
             {
                 // put the previous page on the stack
-                prevStack.Add(page.URL);
+                if(loadingPrevious == false)
+                    prevStack.Add(page.URL);
                 page.URL = newUrl;
 
                 // try to get files and directories in new directory
@@ -314,6 +320,7 @@ namespace FileExplorer
 
                 // build filedgv with all new or prev files
                 page.BuildFileDGV(FileDGV, HiddenFilesCheckBox.CheckState);
+                loadingPrevious = false;
             }
             else
             {
@@ -331,6 +338,8 @@ namespace FileExplorer
                 }));
             }
         }
+
+        #endregion
 
         #region Page Details
 
@@ -422,6 +431,8 @@ namespace FileExplorer
 
         #endregion
 
+        #region File and Directory GridView
+
         // put all of the shortcuts in place in the DGV
         private void LoadShortcuts()
         {
@@ -485,16 +496,12 @@ namespace FileExplorer
         // go to the previous item in the stack if there is one
         private void PreviousButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine();
-            foreach (string s in prevStack)
-            {
-                Console.WriteLine(s);
-            }
-
             // exit if there are no items
             if (prevStack.Count() <= 0)
                 return;
-            
+
+            loadingPrevious = true;
+
             // pop the last item in the stack (top item is last)
             string prev = prevStack.Last();
             prevStack.RemoveAt(prevStack.Count() - 1);
@@ -504,10 +511,6 @@ namespace FileExplorer
 
             UrlTextBox.Text = prev;
             UpdatePageData();
-
-            // remove extra item
-            if(prevStack.Count() > 1)
-                prevStack.RemoveAt(prevStack.Count() - 1);
         }
 
         // go to the next item in the stack if there is one
@@ -530,6 +533,8 @@ namespace FileExplorer
         {
             UpdatePageData();
         }
+
+        #endregion
 
         #region File
 
@@ -628,13 +633,13 @@ namespace FileExplorer
         // rename directory or file
         private void RenameButton_Click(object sender, EventArgs e)
         {
-            // exit if there are no files
-            if (FileDGV.RowCount <= 0)
+            // only rename if conditions are met
+            if (FileDGV.RowCount <= 0               // exit if there are no files
+                || FileDGV.SelectedRows.Count <= 0  // exit if no item is selected
+                || RenameFormOpen == true)          // exit if a rename form is already open
+            {
                 return;
-
-            // only rename one at a time
-            if (RenameFormOpen == true)
-                return;
+            }
 
             // get the name of the clicked item
             string oldName = FileDGV.SelectedRows[0].Cells[0].Value.ToString();
@@ -643,8 +648,6 @@ namespace FileExplorer
 
             RenameFormOpen = true;
             renameForm.Show();
-
-            
         }
 
         // delete selected file or directory
@@ -722,7 +725,6 @@ namespace FileExplorer
         {
             
         }
-
         
     }
 }
