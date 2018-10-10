@@ -88,7 +88,7 @@ namespace FileExplorer
             this.FileDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.FileDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.FileDGV.Size = new System.Drawing.Size(603, 409);
-            this.FileDGV.TabIndex = 0;
+            this.FileDGV.TabIndex = 8;
             this.FileDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileDGV_CellContentClick);
             // 
             // NameColumn
@@ -122,7 +122,7 @@ namespace FileExplorer
             this.UrlTextBox.Location = new System.Drawing.Point(145, 130);
             this.UrlTextBox.Name = "UrlTextBox";
             this.UrlTextBox.Size = new System.Drawing.Size(603, 22);
-            this.UrlTextBox.TabIndex = 1;
+            this.UrlTextBox.TabIndex = 6;
             // 
             // MenuTabControl
             // 
@@ -133,7 +133,7 @@ namespace FileExplorer
             this.MenuTabControl.Name = "MenuTabControl";
             this.MenuTabControl.SelectedIndex = 0;
             this.MenuTabControl.Size = new System.Drawing.Size(986, 99);
-            this.MenuTabControl.TabIndex = 3;
+            this.MenuTabControl.TabIndex = 0;
             // 
             // FileTabPage
             // 
@@ -190,7 +190,7 @@ namespace FileExplorer
             this.HomeTabPage.Location = new System.Drawing.Point(4, 29);
             this.HomeTabPage.Name = "HomeTabPage";
             this.HomeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.HomeTabPage.Size = new System.Drawing.Size(926, 66);
+            this.HomeTabPage.Size = new System.Drawing.Size(978, 66);
             this.HomeTabPage.TabIndex = 0;
             this.HomeTabPage.Text = "Home";
             // 
@@ -200,7 +200,7 @@ namespace FileExplorer
             this.HiddenFilesCheckBox.Location = new System.Drawing.Point(753, 21);
             this.HiddenFilesCheckBox.Name = "HiddenFilesCheckBox";
             this.HiddenFilesCheckBox.Size = new System.Drawing.Size(146, 24);
-            this.HiddenFilesCheckBox.TabIndex = 7;
+            this.HiddenFilesCheckBox.TabIndex = 5;
             this.HiddenFilesCheckBox.Text = "View hidden files";
             this.HiddenFilesCheckBox.UseVisualStyleBackColor = true;
             this.HiddenFilesCheckBox.CheckedChanged += new System.EventHandler(this.HiddenFilesCheckBox_CheckedChanged);
@@ -210,7 +210,7 @@ namespace FileExplorer
             this.DeleteButton.Location = new System.Drawing.Point(282, 6);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(132, 53);
-            this.DeleteButton.TabIndex = 6;
+            this.DeleteButton.TabIndex = 2;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.UseVisualStyleBackColor = true;
             this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
@@ -220,7 +220,7 @@ namespace FileExplorer
             this.NewFolderButton.Location = new System.Drawing.Point(558, 6);
             this.NewFolderButton.Name = "NewFolderButton";
             this.NewFolderButton.Size = new System.Drawing.Size(132, 53);
-            this.NewFolderButton.TabIndex = 5;
+            this.NewFolderButton.TabIndex = 4;
             this.NewFolderButton.Text = "New Folder";
             this.NewFolderButton.UseVisualStyleBackColor = true;
             this.NewFolderButton.Click += new System.EventHandler(this.NewFolderButton_Click);
@@ -230,7 +230,7 @@ namespace FileExplorer
             this.RenameButton.Location = new System.Drawing.Point(420, 6);
             this.RenameButton.Name = "RenameButton";
             this.RenameButton.Size = new System.Drawing.Size(132, 53);
-            this.RenameButton.TabIndex = 4;
+            this.RenameButton.TabIndex = 3;
             this.RenameButton.Text = "Rename";
             this.RenameButton.UseVisualStyleBackColor = true;
             this.RenameButton.Click += new System.EventHandler(this.RenameButton_Click);
@@ -240,7 +240,7 @@ namespace FileExplorer
             this.PasteButton.Location = new System.Drawing.Point(144, 6);
             this.PasteButton.Name = "PasteButton";
             this.PasteButton.Size = new System.Drawing.Size(132, 53);
-            this.PasteButton.TabIndex = 2;
+            this.PasteButton.TabIndex = 1;
             this.PasteButton.Text = "Paste";
             this.PasteButton.UseVisualStyleBackColor = true;
             this.PasteButton.Click += new System.EventHandler(this.PasteButton_Click);
@@ -250,7 +250,7 @@ namespace FileExplorer
             this.CopyButton.Location = new System.Drawing.Point(6, 6);
             this.CopyButton.Name = "CopyButton";
             this.CopyButton.Size = new System.Drawing.Size(132, 53);
-            this.CopyButton.TabIndex = 1;
+            this.CopyButton.TabIndex = 0;
             this.CopyButton.Text = "Copy";
             this.CopyButton.UseVisualStyleBackColor = true;
             this.CopyButton.Click += new System.EventHandler(this.CopyButton_Click);
@@ -261,21 +261,21 @@ namespace FileExplorer
             this.SearchTextBox.Location = new System.Drawing.Point(754, 130);
             this.SearchTextBox.Name = "SearchTextBox";
             this.SearchTextBox.Size = new System.Drawing.Size(225, 22);
-            this.SearchTextBox.TabIndex = 4;
+            this.SearchTextBox.TabIndex = 7;
             // 
             // FileTreeView
             // 
-            this.FileTreeView.Location = new System.Drawing.Point(754, 158);
+            this.FileTreeView.Location = new System.Drawing.Point(754, 159);
             this.FileTreeView.Name = "FileTreeView";
-            this.FileTreeView.Size = new System.Drawing.Size(225, 410);
-            this.FileTreeView.TabIndex = 0;
+            this.FileTreeView.Size = new System.Drawing.Size(225, 409);
+            this.FileTreeView.TabIndex = 9;
             // 
             // UpDirectoryButton
             // 
             this.UpDirectoryButton.Location = new System.Drawing.Point(285, 102);
             this.UpDirectoryButton.Name = "UpDirectoryButton";
             this.UpDirectoryButton.Size = new System.Drawing.Size(70, 23);
-            this.UpDirectoryButton.TabIndex = 6;
+            this.UpDirectoryButton.TabIndex = 4;
             this.UpDirectoryButton.Text = "Up";
             this.UpDirectoryButton.UseVisualStyleBackColor = true;
             this.UpDirectoryButton.Click += new System.EventHandler(this.UpDirectoryButton_Click);
@@ -285,7 +285,7 @@ namespace FileExplorer
             this.PreviousButton.Location = new System.Drawing.Point(145, 102);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(70, 23);
-            this.PreviousButton.TabIndex = 7;
+            this.PreviousButton.TabIndex = 2;
             this.PreviousButton.Text = "<<<";
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
@@ -295,7 +295,7 @@ namespace FileExplorer
             this.NextButton.Location = new System.Drawing.Point(215, 102);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(70, 23);
-            this.NextButton.TabIndex = 8;
+            this.NextButton.TabIndex = 3;
             this.NextButton.Text = ">>>";
             this.NextButton.UseVisualStyleBackColor = true;
             this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
@@ -319,7 +319,7 @@ namespace FileExplorer
             this.ShortcutDGV.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.ShortcutDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.ShortcutDGV.Size = new System.Drawing.Size(134, 466);
-            this.ShortcutDGV.TabIndex = 9;
+            this.ShortcutDGV.TabIndex = 1;
             // 
             // ShortcutColumn
             // 
@@ -333,7 +333,7 @@ namespace FileExplorer
             this.RefreshButton.Location = new System.Drawing.Point(355, 102);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(70, 23);
-            this.RefreshButton.TabIndex = 10;
+            this.RefreshButton.TabIndex = 5;
             this.RefreshButton.Text = "Refresh";
             this.RefreshButton.UseVisualStyleBackColor = true;
             this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);

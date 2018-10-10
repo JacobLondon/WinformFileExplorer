@@ -27,6 +27,7 @@ namespace FileExplorer
 
         }
 
+        // initialize components with items/events on load
         private void RenameForm_Load(object sender, EventArgs e)
         {
             OldNameLabel.Text = OldName;
@@ -54,6 +55,7 @@ namespace FileExplorer
             Form.RenameFormOpen = false;
         }
 
+        // change the name of the file/directory
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             // only rename if the text has valid chars
@@ -95,8 +97,33 @@ namespace FileExplorer
                 }
                 else
                 {
-                    // its a file, rename it
-                    File.Move(Form.page.URL + @"\" + OldName, newFile);
+                    DialogResult result;
+                    bool modify = true;
+
+                    // if the extension has changed, warn the user
+                    if(NewName.IndexOf(old.Extension) != NewName.Length)
+                    {
+                        result = MessageBox.Show(
+                            "If you change a file name extension, the file might become unusable.\n\nAre you sure you want to change it?",
+                            "Rename",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
+
+                        // dont modify
+                        if (result == DialogResult.No)
+                            modify = false;
+                        else if (result == DialogResult.Yes) ;
+                        else
+                            modify = false;
+                    }
+                    
+                    // modify the file name
+                    if(modify == true)
+                    {
+                        // it's a file, rename it
+                        File.Move(Form.page.URL + @"\" + OldName, newFile);
+                    }
+                    
                 }
             }
 

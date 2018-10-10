@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Threading;
+using Shell32;
 
 namespace FileExplorer
 {
@@ -111,6 +112,7 @@ namespace FileExplorer
 
             UrlTextBox.Text += @"\" + itemName;
 
+            // try to open it/run it
             try
             {
                 OpenFileOrDirectory();
@@ -128,6 +130,14 @@ namespace FileExplorer
         
         public void OpenFileOrDirectory()
         {
+            // check its extension to see if its a shortcut (.lnk)
+            FileInfo f = new FileInfo(UrlTextBox.Text);
+            if (f.Extension == ".lnk")
+            {
+                // load the shortcut's url into the URL textbox and load that page
+                UrlTextBox.Text = GetShortcutTargetFile(UrlTextBox.Text);
+            }
+
             // get the file attributes for file or directory
             FileAttributes attr = File.GetAttributes(UrlTextBox.Text);
 
@@ -137,16 +147,16 @@ namespace FileExplorer
                 // its a directory
                 UpdatePageData();
             }
-            else
+            else 
             {
-                // its a file
+                // it's a file, so run the file
                 try
                 {
                     Process.Start(UrlTextBox.Text);
                 }
                 catch (Exception ex)
                 {
-                    // reset the url to stay in the folder (can't be in a file)
+                    // reset the url to stay in the folder (can't be inside a file)
                     UrlTextBox.Text = page.URL;
                     FileTreeView.Nodes.Clear();
 
@@ -160,6 +170,25 @@ namespace FileExplorer
                 // reset the url to stay in the folder (can't be in a file)
                 UrlTextBox.Text = page.URL;
             }
+        }
+
+        // https://stackoverflow.com/questions/2565885/net-read-binary-contents-of-lnk-file
+        // helper method to get the path from a shortcut (.lnk)
+        private static string GetShortcutTargetFile(string shortcutFilename)
+        {
+            string pathOnly = System.IO.Path.GetDirectoryName(shortcutFilename);
+            string filenameOnly = System.IO.Path.GetFileName(shortcutFilename);
+
+            Shell shell = new Shell();
+            Folder folder = shell.NameSpace(pathOnly);
+            FolderItem folderItem = folder.ParseName(filenameOnly);
+            if (folderItem != null)
+            {
+                Shell32.ShellLinkObject link = (Shell32.ShellLinkObject)folderItem.GetLink;
+                return link.Path;
+            }
+
+            return string.Empty;
         }
 
         // show details of the folder
@@ -246,6 +275,10 @@ namespace FileExplorer
             page.URL = Backend.Constants.ROOT;
             UrlTextBox.Text = page.URL;
             UpdatePageData();
+
+            // prevent fullscreen as the components do not resize
+            MaximizeBox = false;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
 
             MenuTabControl.SelectedTab = HomeTabPage;
             SearchTextBox.Text = "Search";
@@ -450,6 +483,7 @@ namespace FileExplorer
                 row.CreateCells(ShortcutDGV);
                 row.Cells[0] = new DataGridViewButtonCell();
                 row.Cells[0].Value = s;
+                row.Height = Backend.Constants.SHORTCUT_HEIGHT;
                 ShortcutDGV.Rows.Add(row);
             }
 
@@ -465,6 +499,7 @@ namespace FileExplorer
             userRow.Cells[0] = new DataGridViewButtonCell();
             userRow.Cells[0].Value = Environment.UserName;
             ShortcutDGV.Rows.Add(userRow);
+            userRow.Height = Backend.Constants.SHORTCUT_HEIGHT;
             shortcuts.Add(Backend.Constants.ROOT);
 
             // add all drives to the shortcut area
@@ -474,6 +509,7 @@ namespace FileExplorer
                 row.CreateCells(ShortcutDGV);
                 row.Cells[0] = new DataGridViewButtonCell();
                 row.Cells[0].Value = d;
+                row.Height = Backend.Constants.SHORTCUT_HEIGHT;
                 ShortcutDGV.Rows.Add(row);
 
                 // add drive to list of shortcuts

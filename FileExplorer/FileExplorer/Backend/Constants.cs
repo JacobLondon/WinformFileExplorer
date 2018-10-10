@@ -17,6 +17,8 @@ namespace FileExplorer.Backend
         public static string ROOT = @"C:\Users\" + USER_NAME;
         public static string POWERSHELL = @"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe";
 
+        public static int SHORTCUT_HEIGHT = 25;
+
         // all of the valid shortcuts
         public static List<string> VALID_SHORTCUTS = new List<string>()
         {
