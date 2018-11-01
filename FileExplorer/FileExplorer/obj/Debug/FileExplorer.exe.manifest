@@ -50,19 +50,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oLmCra7JxqL35R3vZxB1vuuS14BKv9zI7+t3VYtUXVk=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.Diagnostics.Tracing.EventSource.dll" size="159504">
-      <assemblyIdentity name="Microsoft.Diagnostics.Tracing.EventSource" version="1.1.16.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xNK3j2M5U9p5DGnbxy1itU8ljGMKiPe9+8SqYA7jYrI=</dsig:DigestValue>
+        <dsig:DigestValue>h/vcLVV7MBWRlyW54i4Dcx2E85Z7KmCCuirMbcM6XcQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -79,14 +67,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.GraphModel.dll" size="439544">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.GraphModel.dll" size="440072">
       <assemblyIdentity name="Microsoft.VisualStudio.GraphModel" version="15.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IrCPN2ckR1lPU0uKuurm9ov11qx93Xuv1ID5AlOrfAg=</dsig:DigestValue>
+        <dsig:DigestValue>jyLatuOtN9WVuE3S/RiAxfCtN40vLdFdU2Y+Hnzey/I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -103,26 +91,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.RemoteControl.dll" size="55568">
-      <assemblyIdentity name="Microsoft.VisualStudio.RemoteControl" version="14.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>MR3p7JYHLoz/HbSvjysymmojR1bw/EfGI/GAdefWGK8=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.Shell.Framework.dll" size="98312">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.Shell.Framework.dll" size="94984">
       <assemblyIdentity name="Microsoft.VisualStudio.Shell.Framework" version="15.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>+oz/B+N2U8AE1uxpbw7bwv2ZQsGZSH7KcN0hKvJu9lo=</dsig:DigestValue>
+        <dsig:DigestValue>cv8xDovXohy61kz8lV1B8sJJwaUpzGHyB29cSyvw9l0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -163,18 +139,6 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.Telemetry.dll" size="647408">
-      <assemblyIdentity name="Microsoft.VisualStudio.Telemetry" version="15.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>SkAGuEre9Dw1uhvUHmlrAH8qAPQrJfDI4gB5XTyxO7E=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.TextManager.Interop.dll" size="114688">
       <assemblyIdentity name="Microsoft.VisualStudio.TextManager.Interop" version="7.1.40304.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
       <hash>
@@ -195,30 +159,6 @@
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
         <dsig:DigestValue>LCzsz2MwgShNbJC+zeoX7Os6boQROB6E3V7bV/D1hRc=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Microsoft.VisualStudio.Utilities.Internal.dll" size="36656">
-      <assemblyIdentity name="Microsoft.VisualStudio.Utilities.Internal" version="14.0.0.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WEctYvEpMH7WiOQ+EUE4Cy/0UQ6YfT8BI9BvBY8K+EY=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Newtonsoft.Json.dll" size="439280">
-      <assemblyIdentity name="Newtonsoft.Json" version="6.0.0.0" publicKeyToken="30AD4FE6B2A6AEED" language="neutral" processorArchitecture="msil" />
-      <hash>
-        <dsig:Transforms>
-          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-        </dsig:Transforms>
-        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Rb0XVZU8ska5Ecy98+8166zxzK8vm/xlN7ryvsvjlms=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
