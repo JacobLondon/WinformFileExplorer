@@ -755,12 +755,5 @@ namespace FileExplorer
         }
 
         #endregion
-
-        // extra methods DO NOT DELETE
-        private void FileDGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-        
     }
 }

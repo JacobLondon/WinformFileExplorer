@@ -89,7 +89,6 @@ namespace FileExplorer
             this.FileDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.FileDGV.Size = new System.Drawing.Size(603, 409);
             this.FileDGV.TabIndex = 8;
-            this.FileDGV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileDGV_CellContentClick);
             // 
             // NameColumn
             // 
